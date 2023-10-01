@@ -1,3 +1,4 @@
+<!--第三个模板选择页面-->
 <template>
   <div class="template-choose">
     <h2 style="text-align: center">choose template</h2>
