@@ -1,0 +1,20 @@
+.divide-line-bottom {
+  border-bottom: 4px solid;
+  border-image: linear-gradient(90deg, rgba(0, 216, 247, 0) 0%, #00afed 100%) 2 2 2 2;
+}
+
+.divide-line-left {
+  border-left: 4px solid;
+  border-image: linear-gradient(to right, #8f41e9, #578aef) 1;
+}
+
+.divide-line-right {
+  border-right: 4px solid;
+  border-image: linear-gradient(to right, #8f41e9, #578aef) 1;
+}
+
+/* .main-bg,
+section {
+  background: linear-gradient(to right, #c7d5d5 25%, lightgray 0, lightgray 50%, #c7d5d5 0, #c7d5d5 75%, lightgray 0);
+  background-size: 150px 150px;
+} */
