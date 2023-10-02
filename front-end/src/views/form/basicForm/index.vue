@@ -909,8 +909,8 @@ export default {
 
       axios({
         method: 'post',
-        url: `http://localhost:3001/api/upLoad/file`,
-        // url: `http://47.113.221.19:3001/api/upLoad/file`,
+        //url: `http://localhost:3001/api/upLoad/file`,
+         url: `http://47.113.221.19:3001/api/upLoad/file`,
         data: formData,
         headers: {
           'X-Requested-With': null,
@@ -938,8 +938,8 @@ export default {
 
       axios({
         method: 'post',
-        url: `http://localhost:3001/api/upLoad/file`,
-        // url: `http://47.113.221.19:3001/api/upLoad/file`,
+        //url: `http://localhost:3001/api/upLoad/file`,
+         url: `http://47.113.221.19:3001/api/upLoad/file`,
         data: formData,
         headers: {
           'X-Requested-With': null,
@@ -973,8 +973,8 @@ export default {
 
       axios({
         method: 'post',
-        url: `http://localhost:3001/api/upLoad/file`,
-        // url: `http://47.113.221.19:3001/api/upLoad/file`,
+        //url: `http://localhost:3001/api/upLoad/file`,
+         url: `http://47.113.221.19:3001/api/upLoad/file`,
         data: formData,
         headers: {
           'X-Requested-With': null,
