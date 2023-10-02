@@ -2,25 +2,17 @@
 <template>
   <div class="template">
     <a-row class="header">
-      <img class="bg" :src="userInfo.backgroundImage" alt="" />
-
-      <a-row>
-        <h2 style="padding-left: 100px">{{ userInfo.firstName }} {{ userInfo.lastName }}</h2>
-      </a-row>
-
-      <a-row style="text-align: center">
-        <img :height="160" :src="userInfo.avatar" />
-      </a-row>
-
-      <a-row style="font-size: 20px">
-<!--        <a-row><b>Jobs:</b> {{ userInfo.faculty }}</a-row>-->
-        <a-row><b>Tel:</b> {{ userInfo.phone }}</a-row>
-        <a-row><b>Email:</b> {{ userInfo.email }}</a-row>
-        <a-row><b>Office:</b> {{ userInfo.location }}</a-row>
-        <a-row>
-          <a-col :span="12"> <b>Contribution:</b> {{ userInfo.contribution }} </a-col>
-        </a-row>
-      </a-row>
+      <img class="bg" :src="userInfo.backgroundImage" alt="Background" />
+      <h2>{{ userInfo.firstName }} {{ userInfo.lastName }}</h2>
+      <div class="avatar-wrapper">
+        <img :height="160" :src="userInfo.avatar" alt="User Avatar" />
+      </div>
+      <div class="user-info">
+        <p><b>Tel:</b> {{ userInfo.phone }}</p>
+        <p><b>Email:</b> {{ userInfo.email }}</p>
+        <p><b>Office:</b> {{ userInfo.location }}</p>
+        <p><b>Contribution:</b> {{ userInfo.contribution }}</p>
+      </div>
     </a-row>
 
     <a-divider></a-divider>
@@ -30,12 +22,11 @@
         <a-tab-pane key="1" tab="Teaching">
           <a-row v-for="(item, index) in userInfo.teaching" :key="item.time">
             <a-row>
-              <b>{{ index + 1 }}</b>
-              {{ item.description }}
-              {{ item.time }}
+              <b>{{ index + 1 }}</b> {{ item.description }} {{ item.time }}
             </a-row>
           </a-row>
         </a-tab-pane>
+
         <a-tab-pane key="2" tab="About" force-render>
           <a-timeline mode="alternate">
             <a-timeline-item>
@@ -112,13 +103,11 @@
     </a-row>
   </div>
 </template>
-
 <script>
 export default {
   data() {
     return {}
   },
-  components: {},
   props: {
     userInfo: {
       type: Object,
@@ -133,9 +122,14 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.template {
+  font-family: 'Arial', sans-serif;
+}
+
 .header {
   position: relative;
   padding: 20px;
+
   .bg {
     position: absolute;
     left: 0;
@@ -144,6 +138,26 @@ export default {
     bottom: 0;
     width: 100%;
     max-height: 100%;
+    z-index: -1;
+  }
+
+  h2 {
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  .avatar-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+  }
+
+  .user-info {
+    text-align: center;
+    font-size: 20px;
+    p {
+      margin-bottom: 15px;
+    }
   }
 }
 </style>
