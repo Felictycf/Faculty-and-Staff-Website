@@ -126,14 +126,14 @@
       </a-form-item>
 
       <a-form-item
-        label="Location"
+        label="Office"
         :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"
         :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"
       >
         <a-input
           v-decorator="['location', { rules: [{ required: true }] }]"
           name="location"
-          placeholder="Please enter Location"
+          placeholder="Please enter Office"
         />
       </a-form-item>
 
@@ -149,37 +149,37 @@
         />
       </a-form-item> -->
 
-      <a-form-item
-        label="office"
-        :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"
-        :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"
-      >
-        <a-select placeholder="Please enter office" v-decorator="['office', { rules: [{ required: true }] }]">
-          <a-select-option value="Epsom">Epsom</a-select-option>
-          <a-select-option value="New market">New market</a-select-option>
-          <a-select-option value="City">City</a-select-option>
-          <a-select-option value="Avondale">Avondale</a-select-option>
-          <a-select-option value="Newlynn">Newlynn</a-select-option>
-          <a-select-option value="Mount eden">Mount eden</a-select-option>
-          <a-select-option value="Remuera">Remuera</a-select-option>
-          <a-select-option value="Ellerslie">Ellerslie</a-select-option>
-          <a-select-option value="Albany">Albany</a-select-option>
-        </a-select>
-      </a-form-item>
+<!--      <a-form-item-->
+<!--        label="office"-->
+<!--        :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"-->
+<!--        :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"-->
+<!--      >-->
+<!--        <a-select placeholder="Please enter office" v-decorator="['office', { rules: [{ required: true }] }]">-->
+<!--          <a-select-option value="Epsom">Epsom</a-select-option>-->
+<!--          <a-select-option value="New market">New market</a-select-option>-->
+<!--          <a-select-option value="City">City</a-select-option>-->
+<!--          <a-select-option value="Avondale">Avondale</a-select-option>-->
+<!--          <a-select-option value="Newlynn">Newlynn</a-select-option>-->
+<!--          <a-select-option value="Mount eden">Mount eden</a-select-option>-->
+<!--          <a-select-option value="Remuera">Remuera</a-select-option>-->
+<!--          <a-select-option value="Ellerslie">Ellerslie</a-select-option>-->
+<!--          <a-select-option value="Albany">Albany</a-select-option>-->
+<!--        </a-select>-->
+<!--      </a-form-item>-->
 
-      <a-form-item
-        label="faculty"
-        :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"
-        :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"
-      >
-        <a-select placeholder="Please enter faculty" v-decorator="['faculty', { rules: [{ required: true }] }]">
-          <a-select-option value="Art">Art</a-select-option>
-          <a-select-option value="Software engineering">Software engineering</a-select-option>
-          <a-select-option value="architecture">architecture</a-select-option>
-          <a-select-option value="Business">Business</a-select-option>
-          <a-select-option value="Others">Others</a-select-option>
-        </a-select>
-      </a-form-item>
+<!--      <a-form-item-->
+<!--        label="faculty"-->
+<!--        :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"-->
+<!--        :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"-->
+<!--      >-->
+<!--        <a-select placeholder="Please enter faculty" v-decorator="['faculty', { rules: [{ required: true }] }]">-->
+<!--          <a-select-option value="Art">Art</a-select-option>-->
+<!--          <a-select-option value="Software engineering">Software engineering</a-select-option>-->
+<!--          <a-select-option value="architecture">architecture</a-select-option>-->
+<!--          <a-select-option value="Business">Business</a-select-option>-->
+<!--          <a-select-option value="Others">Others</a-select-option>-->
+<!--        </a-select>-->
+<!--      </a-form-item>-->
 
       <a-form-item
         label="Degrees"
@@ -293,21 +293,21 @@
         />
       </a-form-item>
 
-      <a-form-item
-        label="Contributions"
-        :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"
-        :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"
-      >
-        <a-select
-          mode="tags"
-          placeholder="Please enter Contributions"
-          v-decorator="['contributions', { rules: [{ required: true }] }]"
-        >
-          <a-select-option v-for="item in userList" :key="item.id" :value="item.id"
-            >{{ item.firstName }} {{ item.lastName }}</a-select-option
-          >
-        </a-select>
-      </a-form-item>
+<!--      <a-form-item-->
+<!--        label="Contributions"-->
+<!--        :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"-->
+<!--        :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"-->
+<!--      >-->
+<!--        <a-select-->
+<!--          mode="tags"-->
+<!--          placeholder="Please enter Contributions"-->
+<!--          v-decorator="['contributions', { rules: [{ required: true }] }]"-->
+<!--        >-->
+<!--          <a-select-option v-for="item in userList" :key="item.id" :value="item.id"-->
+<!--            >{{ item.firstName }} {{ item.lastName }}</a-select-option-->
+<!--          >-->
+<!--        </a-select>-->
+<!--      </a-form-item>-->
 
       <a-form-item
         label="publications"

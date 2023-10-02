@@ -52,12 +52,12 @@ const UserSchema = new Schema({
   //   type: String,
   // },
 
-  office: {
-    type: String,
-  },
-  faculty: {
-    type: String,
-  },
+  // office: {
+  //   type: String,
+  // },
+  // faculty: {
+  //   type: String,
+  // },
   phone: {
     type: String,
   },
@@ -105,7 +105,7 @@ const UserSchema = new Schema({
     type: String,
   },
 
-  contributions: { type: Array }, // 多个数据存储
+  // contributions: { type: Array }, // 多个数据存储
 
   highlights: {
     type: Array, // 多个数据存储
