@@ -47,10 +47,10 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-
-  department: {
-    type: String,
-  },
+  //
+  // department: {
+  //   type: String,
+  // },
 
   office: {
     type: String,

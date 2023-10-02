@@ -70,18 +70,18 @@
           placeholder="Please enter Phone"
         />
       </a-form-item>
-
-      <a-form-item
-        label="Department"
-        :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"
-        :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"
-      >
-        <a-input
-          v-decorator="['department', { rules: [{ required: true }] }]"
-          name="department"
-          placeholder="Please enter Department"
-        />
-      </a-form-item>
+<!--删除掉 department-->
+<!--      <a-form-item-->
+<!--        label="Department"-->
+<!--        :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"-->
+<!--        :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"-->
+<!--      >-->
+<!--        <a-input-->
+<!--          v-decorator="['department', { rules: [{ required: true }] }]"-->
+<!--          name="department"-->
+<!--          placeholder="Please enter Department"-->
+<!--        />-->
+<!--      </a-form-item>-->
       <a-form-item
         label="Contact"
         :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"
