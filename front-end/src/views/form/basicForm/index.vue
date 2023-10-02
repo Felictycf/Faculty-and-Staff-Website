@@ -182,14 +182,14 @@
       </a-form-item>
 
       <a-form-item
-        label="Degtees"
+        label="Degrees"
         :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"
         :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"
       >
         <a-input
           v-decorator="['degtees', { rules: [{ required: true }] }]"
           name="degtees"
-          placeholder="Please enter Degtees"
+          placeholder="Please enter Degrees"
         />
       </a-form-item>
 
