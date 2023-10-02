@@ -19,7 +19,7 @@ const constantRouterComponents = {
   Analysis: () => import('@/views/dashboard/Analysis'),
 
   // form
-  BasicForm: () => import('@/views/form/basicForm'),
+  BasicForm: () => import('@/views/form/basicForm/index.vue'),
   StepForm: () => import('@/views/form/stepForm/StepForm'),
   AdvanceForm: () => import('@/views/form/advancedForm/AdvancedForm'),
 

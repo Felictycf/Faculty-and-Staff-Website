@@ -69,7 +69,7 @@ const UserSchema = new Schema({
     type: String,
   },
   teaching: {
-    type: Array,
+    type: Array, // 多个数据存储
   },
 
   contactInformation: {
@@ -82,7 +82,7 @@ const UserSchema = new Schema({
     type: String,
   },
   publications: {
-    type: Array,
+    type: Array, // 多个数据存储
   },
   template: {
     type: Number,
@@ -99,16 +99,16 @@ const UserSchema = new Schema({
   },
 
   degrees: {
-    type: Array,
+    type: Array, // 多个数据存储
   },
   backgroundImage: {
     type: String,
   },
 
-  contributions: { type: Array },
+  contributions: { type: Array }, // 多个数据存储
 
   highlights: {
-    type: Array,
+    type: Array, // 多个数据存储
   },
 });
 

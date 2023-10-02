@@ -105,7 +105,7 @@
         />
       </a-form-item> -->
       <a-form-item
-        label="Contribution"
+        label="publication"
         :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"
         :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"
       >
@@ -113,7 +113,7 @@
           :auto-size="{ minRows: 2, maxRows: 20 }"
           v-decorator="['contribution', { rules: [{ required: true }] }]"
           name="contribution"
-          placeholder="Please enter Contribution"
+          placeholder="Please enter publication"
         />
       </a-form-item>
 
@@ -545,7 +545,6 @@
 
       <a-form-item :wrapperCol="{ span: 24 }" style="text-align: center">
         <a-button htmlType="submit" type="primary" @click="handleSubmit">submit</a-button>
-
         <a-button
           htmlType="submit"
           type="primary"

@@ -18,7 +18,7 @@ export const asyncRouterMap = [
       {
         path: '/form/base-form',
         name: 'BaseForm',
-        component: () => import('@/views/form/basicForm'),
+        component: () => import('@/views/form/basicForm/index.vue'),
         meta: { title: 'Editing', keepAlive: true, permission: ['form'] },
       },
 
@@ -75,7 +75,7 @@ export const asyncRouterMap = [
           {
             path: '/form/base-form',
             name: 'BaseForm',
-            component: () => import('@/views/form/basicForm'),
+            component: () => import('@/views/form/basicForm/index.vue'),
             meta: { title: 'menu.form.basic-form', keepAlive: true, permission: ['form'] },
           },
           {
