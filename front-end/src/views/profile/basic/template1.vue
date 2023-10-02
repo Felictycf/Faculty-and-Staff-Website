@@ -78,18 +78,21 @@
           </a-timeline>
         </a-tab-pane>
         <a-tab-pane key="3" tab="Publication">
-          <a-row v-for="(item, index) in userInfo.publications" :key="item.time">
-            <a-row>
-              <b>{{ index + 1 }}</b>
-
-              <img :src="item.img" alt="" width="100px" />
-              {{ item.time }}
-              {{ item.description }}
-              <a :href="item.pdf" :download="item.pdf">pdf</a>
-              {{ item.description }}
-            </a-row>
+          <a-row :gutter="{ xs: 8, sm: 16, md: 24, lg: 32 }"> <!-- Gutter to add spacing between grid columns -->
+            <a-col v-for="(item, index) in userInfo.publications" :key="item.time" span="8">
+              <div class="publication-item">
+                <img :src="item.img" alt="" class="publication-img" />
+                <div class="publication-data">
+                  <div class="time">{{ item.time }}</div>
+                  <div class="description">{{ item.description }}</div>
+                  <a class="pdf-link" :href="item.pdf" :download="item.pdf">View PDF</a>
+                </div>
+              </div>
+            </a-col>
           </a-row>
         </a-tab-pane>
+
+
         <a-tab-pane key="4" tab="Highlights">
           <a-row v-for="(item, index) in userInfo.highlights" :key="item.time">
             <a-row>
@@ -122,6 +125,56 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
+                     /* ... your existing styles ... */
+                     .publication-item {
+                       display: flex;
+                       flex-direction: column;
+                       align-items: center;
+                       border: 1px solid #e3e5e5; // Add a border
+                       border-radius: 4px; // Rounded corners
+                       padding: 10px; // Inner spacing
+                       margin: 10px 0; // Space between cards
+                       box-shadow: 0 2px 5px rgba(0,0,0,0.1); // A subtle shadow for the card
+
+                       .publication-img {
+                         height: 200px;
+                         width: 100%;
+                         object-fit: cover;
+                         object-position: center;
+                         margin-bottom: 10px;
+                       }
+                     }
+                   .publication-data {
+                     background-color: #e3e5e5;
+                     padding: 50px;
+                     display: flex;
+                     flex-direction: column; // Ensures vertical layout of content
+                     justify-content: space-between; // Distributes the space evenly between the contents
+                     height: 200px; // Adjust this value based on your needs
+
+                     .time {
+                       font-weight: bold; // Makes the title stand out
+                       margin-bottom: 10px; // Add some space between title and description
+                     }
+
+                     .description {
+                       flex: 1; // Allows it to take up remaining space
+                       margin-bottom: 10px; // Add some space between description and link
+                     }
+
+                     .pdf-link {
+                       align-self: center; // Centers the link
+                       background-color: #333; // Dark background for the link
+                       color: #fff; // White text
+                       padding: 5px 10px; // Some padding to make it look nice
+                       text-decoration: none; // Remove underline
+                       border-radius: 4px; // Rounded corners
+                       &:hover {
+                         background-color: #555; // Change background on hover
+                       }
+                     }
+                   }
 .template {
   font-family: 'Arial', sans-serif;
 }

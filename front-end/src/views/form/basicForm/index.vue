@@ -320,15 +320,43 @@
             :slot="col2"
             slot-scope="text2, record2"
           >
+            <!-- Image upload and preview for img column -->
+            <template v-if="col2 === 'img'">
+              <a-upload
+                v-if="record2?.editable"
+                :customRequest="(file) => handleChangeImg(file, record2.key,'img')"
+                list-type="picture-card"
+                accept="image/*"
+              >
+                <div v-if="!text2" class="ant-upload-text">Upload</div>
+              </a-upload>
+              <img v-else v-if="formValue.img" :src="formValue.img" alt="Uploaded Image" style="width: 100%" />
+            </template>
+
+            <!-- File upload and link for pdf column -->
+            <template v-if="col2 === 'pdf'">
+              <a-upload
+                v-if="record2?.editable"
+                :customRequest="(file) => handleChangePDF(file, record2.key,'pdf')"
+                accept=".pdf"
+              >
+                <button>
+                  <a-icon type="upload" /> Upload PDF
+                </button>
+              </a-upload>
+              <a v-else-if="text2" :href="text2" target="_blank">View PDF</a>
+            </template>
+
+            <!-- Default textarea for other columns -->
             <a-textarea
+              v-if="col2 !== 'img' && col2 !== 'pdf' && record2?.editable"
               :key="col2"
-              v-if="record2?.editable"
               style="margin: -5px 0"
               :value="text2"
               :placeholder="columns2[indx].title"
               @change="(e) => handleRowChange2(e.target.value, record2.key, col2)"
             />
-            <template v-else>{{ text2 }}</template>
+            <template v-if="col2 !== 'img' && col2 !== 'pdf'">{{ text2 }}</template>
           </template>
 
           <template slot="operation" slot-scope="text, record2">
@@ -733,7 +761,9 @@ export default {
     },
     handleRowChange2(value, key, column) {
       const newData = [...this.data2]
+      console.log(newData)
       const target = newData.find((item) => key === item.key)
+      console.log(target)
       if (target) {
         target[column] = value
         this.data2 = newData
@@ -873,15 +903,6 @@ export default {
     // 图片上传
     handleChange(file, key) {
       const that = this
-      // if (info.file.status === 'uploading') {
-      //   return
-      // }
-      // if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      // getBase64(info.file.originFileObj, (base64Url: string) => {
-      //   imageUrl.value = base64Url
-      // })
-      // const rawFile = $('#input-file-avatar')[0].files[0]
 
       var formData = new FormData()
       formData.append('file', file.file)
@@ -899,6 +920,8 @@ export default {
         .then((res) => {
           message.success('upload success')
           that.formValue[key] = res.data.url
+          console.log(res.data.url)
+          console.log(that.formValue)
           that.form.setFieldsValue({ [key]: res.data.url })
         })
         .catch((e) => {})
@@ -907,6 +930,77 @@ export default {
       //   message.error('upload error')
       // }
     },
+    handleChangePDF(file,record_key, key) {
+      const that = this
+
+      var formData = new FormData()
+      formData.append('file', file.file)
+
+      axios({
+        method: 'post',
+        url: `http://localhost:3001/api/upLoad/file`,
+        // url: `http://47.113.221.19:3001/api/upLoad/file`,
+        data: formData,
+        headers: {
+          'X-Requested-With': null,
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+        .then((res) => {
+          message.success('upload success')
+          that.formValue[key] = res.data.url
+          console.log(res.data.url)
+          console.log(that.formValue)
+          console.log(record_key)
+          this.handleRowChange2(res.data.url,record_key,key)
+
+
+
+          console.log(this.data2)
+          that.form.setFieldsValue({ [key]: res.data.url })
+        })
+        .catch((e) => {})
+      // }
+      // if (info.file.status === 'error') {
+      //   message.error('upload error')
+      // }
+    },
+    handleChangeImg(file,record_key, key) {
+      const that = this
+
+      var formData = new FormData()
+      formData.append('file', file.file)
+
+      axios({
+        method: 'post',
+        url: `http://localhost:3001/api/upLoad/file`,
+        // url: `http://47.113.221.19:3001/api/upLoad/file`,
+        data: formData,
+        headers: {
+          'X-Requested-With': null,
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+        .then((res) => {
+          message.success('upload success')
+          that.formValue[key] = res.data.url
+          console.log(res.data.url)
+          console.log(that.formValue)
+          console.log(record_key)
+          this.handleRowChange2(res.data.url,record_key,key)
+
+
+
+          console.log(this.data2)
+          that.form.setFieldsValue({ [key]: res.data.url })
+        })
+        .catch((e) => {})
+      // }
+      // if (info.file.status === 'error') {
+      //   message.error('upload error')
+      // }
+    },
+
 
     toChooseTemplate() {
       this.$router.push('/profile/advanced')
