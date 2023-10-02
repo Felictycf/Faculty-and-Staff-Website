@@ -13,10 +13,10 @@
       </a-row>
 
       <a-row style="font-size: 20px">
-        <a-row><b>Jobs:</b> {{ userInfo.faculty }}</a-row>
+<!--        <a-row><b>Jobs:</b> {{ userInfo.faculty }}</a-row>-->
         <a-row><b>Tel:</b> {{ userInfo.phone }}</a-row>
         <a-row><b>Email:</b> {{ userInfo.email }}</a-row>
-        <a-row><b>Office:</b> {{ userInfo.office }}</a-row>
+        <a-row><b>Office:</b> {{ userInfo.location }}</a-row>
         <a-row>
           <a-col :span="12"> <b>Contribution:</b> {{ userInfo.contribution }} </a-col>
         </a-row>

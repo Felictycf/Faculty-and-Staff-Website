@@ -124,7 +124,7 @@
         </a-row>
         <a-row style="background: #608ba3b8; padding: 10px">
           <a-col :span="11">
-            <b>Location: {{ userInfo.location }}</b>
+            <b>Office: {{ userInfo.location }}</b>
           </a-col>
           <a-col :span="2">
             <a-divider type="vertical" style="height: 60px; border-color: black" />

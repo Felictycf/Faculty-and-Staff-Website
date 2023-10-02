@@ -25,7 +25,7 @@
               <p>Availability:{{ userInfo.avibilitiy }}</p>
             </a-row>
             <a-row>
-              <p>Office:{{ userInfo.office }}</p>
+              <p>Office:{{ userInfo.location }}</p>
             </a-row>
           </a-col>
         </a-row>
