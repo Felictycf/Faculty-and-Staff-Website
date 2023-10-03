@@ -1,4 +1,3 @@
-<!--功能代码模版选择4-->
 <template>
   <div class="template">
     <a-row :gutter="2">
@@ -17,10 +16,13 @@
           </a-col>
           <a-col :span="12">
             <a-row>
-              <a-col :span="12">Phone: {{ userInfo.phone }}</a-col>
-              <a-col :span="12">Email: {{ userInfo.email }}</a-col>
+              <a-icon type="phone" />
+              Phone: {{ userInfo.phone }}
             </a-row>
-            <br />
+            <a-row>
+              <a-icon type="mail" />
+              Email: {{ userInfo.email }}
+            </a-row>
             <a-row>
               <p>Availability:{{ userInfo.avibilitiy }}</p>
             </a-row>
@@ -31,8 +33,7 @@
         </a-row>
 
         <a-row>
-          <!-- <h2 class="title">{{ userInfo.title }}</h2> -->
-          <h2>Recent Highlights</h2>
+          <h2><a-icon type="book" /> Recent Highlights</h2>
           <div class="list">
             <div class="item" v-for="item in userInfo.highlights" :key="item.time">
               <div style="margin-bottom: 10px">
@@ -48,15 +49,15 @@
         </a-row>
         <br />
         <a-row>
-          <h2>Fields of research</h2>
+          <h2><a-icon type="experiment" /> Fields of research</h2>
           <div>{{ userInfo.researchAreas }}</div>
         </a-row>
         <br />
 
         <a-row>
-          <h2>Teaching</h2>
+          <h2><a-icon type="read" /> Teaching</h2>
           <ul>
-            <li v-for="(item, index) in userInfo.teaching" :key="item.time" style="list">
+            <li v-for="(item, index) in userInfo.teaching" :key="item.time">
               {{ index + 1 }}. {{ item.description }}
             </li>
           </ul>
@@ -64,41 +65,19 @@
       </a-col>
 
       <a-col :span="11" :offset="1">
-        <h2>Publication</h2>
-
+        <h2><a-icon type="book-open" /> Publication</h2>
         <a-row v-for="(item, index) in userInfo.publications" :key="item.time">
-          <a-row>
-            <b>{{ index + 1 }}</b>
+          <b>{{ index + 1 }}</b>
+          <img :src="item.img" alt="" width="100px" />
 
-            <img :src="item.img" alt="" width="100px" />
-            {{ item.time }}
-            {{ item.description }}
-            <a :href="item.pdf" :download="item.pdf">pdf</a>
-            {{ item.description }}
-          </a-row>
+           {{item.title}}
+         
+          <br/>
+
+          {{ item.time }}
+          <div class="limited-description">{{ item.description }}</div>
+          <a :href="item.pdf" :download="item.pdf">pdf</a>
         </a-row>
-        <!-- 
-        <div class="list">
-          <a-card
-            style="width: 100%; margin-top: 10px"
-            v-for="item in userList.filter((item) => userInfo.contributions.includes(item.id))"
-            :title="`${item.firstName}${item.lastName}`"
-          >
-            <template #extra
-              ><span style="color: blue; cursor: pointer" @click="toDetail(item.id)">learn more</span></template
-            >
-            <a-row>
-              <a-col :span="6">
-                <img :src="item.avatar" alt="" width="100px" />
-              </a-col>
-              <a-col :span="18">
-                <p>{{ item.date }}</p>
-                <h2 class="ell-1">{{ item.title }}</h2>
-                <p class="ell-2">{{ item.contribution }}</p>
-              </a-col>
-            </a-row>
-          </a-card>
-        </div> -->
       </a-col>
     </a-row>
   </div>
@@ -116,7 +95,6 @@ export default {
       default: () => [],
     },
   },
-
   methods: {
     toDetail(id) {
       this.$router.push({
@@ -134,6 +112,52 @@ export default {
 </script>
 
 <style lang="less" scoped>
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+}
+
+.template {
+  background-color: #f6f8fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+h1, h2, h3 {
+  color: #333;
+}
+
+h1 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 34px;
+}
+
+h2 {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 28px;
+  border-bottom: 2px solid #e7e7e7;
+  padding-bottom: 5px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+.limited-description {
+  .ell-3;
+  max-width: 90%;
+}
+
+a-icon {
+  margin-right: 8px;
+}
+
+.list, a-row, a-col {
+  color: #555;
+}
+
 .ell-1 {
   overflow: hidden;
   display: -webkit-box;
@@ -146,5 +170,12 @@ export default {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.ell-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 </style>

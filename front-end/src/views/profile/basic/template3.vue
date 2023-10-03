@@ -75,7 +75,8 @@
       </a-col>
 
       <a-col :span="8" style="padding: 0 20px">
-        <h2 >Recent Highlights</h2>
+        <h2 style="font-family: 'Arial', sans-serif; color: #4A90E2; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); margin-bottom: 10px; border-bottom: 2px solid #ECECEC; padding-bottom: 8px;">Recent Highlights</h2>
+
         <div class="list">
           <div class="item" style="margin-bottom: 30px" v-for="item in userInfo.highlights" :key="item.time">
             <h2>{{ item.time }}</h2>
@@ -83,11 +84,12 @@
           </div>
         </div>
 
-        <h2>Fields of research</h2>
+        <h2 style="font-family: 'Arial', sans-serif; color: #4A90E2; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); margin-bottom: 10px; border-bottom: 2px solid #ECECEC; padding-bottom: 8px;">  Fields of research</h2>
+
 
         <div>{{ userInfo.researchAreas }}</div>
 
-        <h2>Availability</h2>
+        <h2 style="font-family: 'Arial', sans-serif; color: #4A90E2; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); margin-bottom: 10px; border-bottom: 2px solid #ECECEC; padding-bottom: 8px;">Availability</h2>
 
         <div>{{ userInfo.avibilitiy }}</div>
 
