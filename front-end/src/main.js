@@ -12,6 +12,7 @@ import { VueAxios } from './utils/request'
 import ProLayout, { PageHeaderWrapper } from '@ant-design-vue/pro-layout'
 import themePluginConfig from '../config/themePluginConfig'
 import 'ant-design-vue/dist/antd.css'
+import { createFromIconfontCN } from '@ant-design/icons-vue';
 
 import { Transfer, FormModel, Cascader, Collapse, Timeline } from 'ant-design-vue'
 
@@ -35,7 +36,9 @@ Vue.use(VueAxios)
 Vue.component('pro-layout', ProLayout)
 Vue.component('page-container', PageHeaderWrapper)
 Vue.component('page-header-wrapper', PageHeaderWrapper)
-
+Vue.component('IconFont', createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_1234567_abcd1234.js'
+}));
 Vue.use(Cascader)
 Vue.use(Collapse)
 Vue.use(Timeline)

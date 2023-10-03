@@ -328,7 +328,7 @@
                 list-type="picture-card"
                 accept="image/*"
               >
-                <div v-if="!text2" class="ant-upload-text">Upload</div>
+                <div v-if="!text2" class="ant-upload-text"><a-icon type="file-image" />Upload</div>
               </a-upload>
 <!--              text 2 插槽 渲染数据-->
               <img v-else v-if="text2" :src="text2" alt="Uploaded Image" style="width: 100%" />
@@ -365,7 +365,9 @@
             <template v-if="record2?.editable">
               <span v-if="record2?.isNew">
                 <a-popconfirm title="is delete" @confirm="remove2(record2.key)">
-                  <a>delete</a>
+                    <a-button type="danger">
+     <a-icon type="delete" /> Delete
+    </a-button>
                 </a-popconfirm>
               </span>
               <span v-else>
@@ -375,7 +377,9 @@
             <span v-else>
               <a @click="toggle(record2.key)">edit</a>
               <a-popconfirm title="is delete" @confirm="remove2(record2.key)">
-                <a>delete</a>
+                 <a-button type="danger">
+     <a-icon type="delete" /> Delete
+    </a-button>
               </a-popconfirm>
             </span>
           </template>
@@ -411,7 +415,9 @@
             <template v-if="record.editable">
               <span v-if="record.isNew">
                 <a-popconfirm title="is delete?" @confirm="remove1(record.key)">
-                  <a>delete</a>
+                   <a-button type="danger">
+     <a-icon type="delete" /> Delete
+    </a-button>
                 </a-popconfirm>
               </span>
               <span v-else>
@@ -421,7 +427,9 @@
             <span v-else>
               <a @click="toggle(record.key)">edit</a>
               <a-popconfirm title="是否要删除此行？" @confirm="remove1(record.key)">
-                <a>delete</a>
+                 <a-button type="danger">
+     <a-icon type="delete" /> Delete
+    </a-button>
               </a-popconfirm>
             </span>
           </template>
@@ -457,7 +465,9 @@
             <template v-if="record.editable">
               <span v-if="record.isNew">
                 <a-popconfirm title="is delete?" @confirm="remove3(record.key)">
-                  <a>delete</a>
+                   <a-button type="danger">
+     <a-icon type="delete" /> Delete
+    </a-button>
                 </a-popconfirm>
               </span>
               <span v-else>
@@ -467,7 +477,9 @@
             <span v-else>
               <a @click="toggle(record.key)">edit</a>
               <a-popconfirm title="是否要删除此行？" @confirm="remove3(record.key)">
-                <a>delete</a>
+                <a-button type="danger">
+     <a-icon type="delete" /> Delete
+    </a-button>
               </a-popconfirm>
             </span>
           </template>
@@ -503,7 +515,9 @@
             <template v-if="record.editable">
               <span v-if="record.isNew">
                 <a-popconfirm title="is delete?" @confirm="remove4(record.key)">
-                  <a>delete</a>
+              <a-button type="danger">
+     <a-icon type="delete" /> Delete
+    </a-button>
                 </a-popconfirm>
               </span>
               <span v-else>
@@ -513,7 +527,9 @@
             <span v-else>
               <a @click="toggle(record.key)">edit</a>
               <a-popconfirm title="是否要删除此行？" @confirm="remove4(record.key)">
-                <a>delete</a>
+                  <a-button type="danger">
+     <a-icon type="delete" /> Delete
+    </a-button>
               </a-popconfirm>
             </span>
           </template>
@@ -549,7 +565,9 @@
             <template v-if="record.editable">
               <span v-if="record.isNew">
                 <a-popconfirm title="is delete?" @confirm="remove5(record.key)">
-                  <a>delete</a>
+                   <a-button type="danger">
+     <a-icon type="delete" /> Delete
+    </a-button>
                 </a-popconfirm>
               </span>
               <span v-else>
@@ -559,7 +577,9 @@
             <span v-else>
               <a @click="toggle(record.key)">edit</a>
               <a-popconfirm title="是否要删除此行？" @confirm="remove5(record.key)">
-                <a>delete</a>
+                 <a-button type="danger">
+     <a-icon type="delete" /> Delete
+    </a-button>
               </a-popconfirm>
             </span>
           </template>
@@ -574,7 +594,7 @@
       </a-form-item>
 
       <a-form-item :wrapperCol="{ span: 24 }" style="text-align: center">
-        <a-button htmlType="submit" type="primary" @click="handleSubmit">submit</a-button>
+        <a-button htmlType="submit" type="primary" @click="handleSubmit"><a-icon type="check-circle" /> submit</a-button>
         <a-button
           htmlType="submit"
           type="primary"

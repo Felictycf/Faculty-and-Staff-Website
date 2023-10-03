@@ -3,31 +3,30 @@
   <div class="template">
     <a-row class="header">
       <img class="bg"  :src="userInfo.backgroundImage" alt="Background" />
-      <h2>{{ userInfo.firstName }} {{ userInfo.lastName }}</h2>
+      <h2><a-icon type="idcard" />   {{ userInfo.firstName }} {{ userInfo.lastName }}</h2>
 
       <div class="avatar-wrapper">
         <img :height="160" :src="userInfo.avatar" alt="User Avatar" />
       </div>
       <div class="user-info">
-        <p ><b>Tel:</b> {{ userInfo.phone }}</p>
-        <p><b>Email:</b> {{ userInfo.email }}</p>
+        <p ><b> Tel <a-icon type="phone"  /> :</b> {{ userInfo.phone }}</p>
+        <p><b>Email <a-icon type="message" />:</b> {{ userInfo.email }}</p>
         <p><b>Office:</b> {{ userInfo.location }}</p>
 <!--        <p><b>Contribution:</b> {{ userInfo.contribution }}</p>-->
       </div>
     </a-row>
 
     <a-divider></a-divider>
-
     <a-row>
       <a-tabs default-active-key="2" type="card">
         <a-tab-pane key="1" tab="Teaching">
-          <a-row v-for="(item, index) in userInfo.teaching" :key="item.time">
-            <a-row>
-              <b>{{ index + 1 }}</b> {{ item.description }} {{ item.time }}
-            </a-row>
-          </a-row>
+          <div class="teaching-circle">
+            <h3 class="teaching-title">PHD and Master Supervision</h3>
+            <div v-for="(item, index) in userInfo.teaching" :key="item.time" class="teaching-item">
+              <span class="teaching-description"><a-icon type="read" />      {{ item.description }} <span class="teaching-time">({{ item.time }})</span></span>
+            </div>
+          </div>
         </a-tab-pane>
-
         <a-tab-pane key="2" tab="About" force-render>
           <a-timeline mode="alternate">
             <a-timeline-item>
@@ -100,19 +99,29 @@
 
 
         <a-tab-pane key="4" tab="Highlights">
-          <a-row v-for="(item, index) in userInfo.highlights" :key="item.time">
-            <a-row>
-              <b>{{ index + 1 }}</b>
-              {{ item.description }}
-              {{ item.time }}
-            </a-row>
+          <a-row class="highlight-wrapper" v-for="(item, index) in userInfo.highlights" :key="item.time">
+            <a-col span="2" class="highlight-icon-wrapper">
+
+              <div class="highlight-icon">
+                <a-icon type="pushpin" theme="twoTone" />
+              </div>
+
+
+            </a-col>
+            <a-col span="22" class="highlight-content-wrapper">
+              <div class="highlight-content">
+                <b>{{ index + 1 }}</b> {{ item.description }} <span class="highlight-time">{{ item.time }}</span>
+              </div>
+            </a-col>
           </a-row>
         </a-tab-pane>
+
       </a-tabs>
     </a-row>
   </div>
 </template>
 <script>
+
 export default {
   data() {
     return {}
@@ -149,6 +158,90 @@ export default {
 </script>
 
 <style lang="less" scoped>
+/* ... your existing styles ... */
+
+.highlight-wrapper {
+  margin: 20px 0;
+  background-color: #f7f8fa;  // 轻微的背景色，使其与背景形成对比
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); // 精致的阴影，使其具有深度感
+  transition: transform 0.3s ease; // 平滑的过渡效果
+
+  &:hover {
+    transform: translateY(-5px);  // 当鼠标悬停时，轻微向上移动
+  }
+}
+
+.highlight-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlight-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #6bc3df;
+  border-radius: 50%;  // 创建一个完美的圆形
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;  // 图标的颜色
+  font-size: 24px;
+}
+
+.highlight-content-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.highlight-content {
+  padding: 15px 20px;
+  font-size: 18px;  // 使字体稍微大一些
+  color: #333;  // 深色字体
+}
+
+.highlight-time {
+  font-size: 16px;
+  color: #888;  // 灰色的时间
+  margin-left: 10px;
+}
+
+
+.teaching-circle {
+  //background-color: #6bc3df;
+  border-radius: 10px;  // Slightly rounded corners
+  border: 10px solid #6bc3df;  // Border around the rectangle
+  width: 90%;  // Adjust based on your desired width
+  max-width: 600px;  // Adjust based on your desired maximum width
+  padding: 20px 30px;  // Inner spacing for the rectangle
+  margin: 20px auto;  // Centers the rectangle and gives it a vertical space
+  display: flex;
+  flex-direction: column;
+  align-items: center;  // Aligns items to the center of the rectangle
+}
+
+.teaching-title {
+  font-size: 24px;  // Adjust based on your desired size
+  margin-bottom: 20px;  // Space below the title
+  text-align: center;
+}
+
+.teaching-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;  // Places description and time at opposite ends
+
+}
+
+.teaching-description {
+  //flex: 1;  // Takes up remaining space pushing time to the right
+}
+
+.teaching-time {
+  //margin-left: 10px;  // Space between description and time
+  font-weight: bold;  // Makes the time bold
+}
 
 
 .carousel-btn {
@@ -274,7 +367,7 @@ export default {
     padding-left: 20px;  // Add some padding on the left for consistency
     p {
       margin-bottom: 15px;
-      
+      font-size: 15px;
 
     }
   }
