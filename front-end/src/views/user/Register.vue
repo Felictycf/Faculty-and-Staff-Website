@@ -132,7 +132,7 @@
           :loading="registerBtn"
           @click.stop.prevent="handleSubmit"
           :disabled="registerBtn"
-          >{{ $t('user.register.register') }}
+        >{{ $t('user.register.register') }}
         </a-button>
         <router-link class="login" :to="{ name: 'login' }">{{ 'sign-in' }}</router-link>
       </a-form-item>
@@ -331,7 +331,8 @@ export default {
     },
   },
 }
-</script>
+</script><!-- ... (rest of your template code) -->
+
 <style lang="less">
 .user-register {
   &.error {
@@ -348,11 +349,19 @@ export default {
 }
 
 .user-layout-register {
-  .ant-input-group-addon:first-child {
-    background-color: #fff;
+  .ant-input-group-addon:first-child,
+  a-input,
+  a-input-password,
+  .register-button {
+    background-color: #ecdcc0;
+  }
+
+  .register-button {
+    color: black;  // 设置注册按钮的文字颜色为黑色
   }
 }
 </style>
+
 <style lang="less" scoped>
 .user-layout-register {
   & > h3 {
@@ -373,9 +382,12 @@ export default {
   .login {
     float: right;
     line-height: 40px;
+    color: #a7695c;  // 设置登录链接颜色为#ecdcc0
   }
 }
 .main {
   padding-top: 40px;
 }
 </style>
+
+<!-- ... (rest of your script code) -->

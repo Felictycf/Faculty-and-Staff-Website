@@ -89,23 +89,30 @@
           class="login-button"
           :loading="state.loginBtn"
           :disabled="state.loginBtn"
-          >{{ $t('user.login.login') }}</a-button
+        >Login</a-button
         >
+        <!-- Add your sign up and forget password buttons here -->
+        <a-button
+          size="large"
+          @click="navigateToSignup"
+          class="forge-password"
+
+        >Sign Up
+
+        </a-button>
+        <a-button
+          size="large"
+
+          class="forge-password"
+          style="margin-left: 120px;"
+        >Forget Password</a-button>
+
+
+
       </a-form-item>
 
-      <div class="user-login-other">
-        <!-- <span>{{ $t('user.login.sign-in-with') }}</span>
-        <a>
-          <a-icon class="item-icon" type="alipay-circle"></a-icon>
-        </a>
-        <a>
-          <a-icon class="item-icon" type="taobao-circle"></a-icon>
-        </a>
-        <a>
-          <a-icon class="item-icon" type="weibo-circle"></a-icon>
-        </a> -->
-        <router-link class="register" :to="{ name: 'register' }">{{ $t('user.login.signup') }}</router-link>
-      </div>
+
+
     </a-form>
 
     <two-step-captcha
@@ -159,6 +166,9 @@ export default {
     // this.requiredTwoStepCaptcha = true
   },
   methods: {
+    navigateToSignup() {
+      this.$router.push({ name: 'register' }); // assuming the route name for the signup page is 'signup'
+    },
     ...mapActions(['Login', 'Logout']),
     // handler
     handleUsernameOrEmail(rule, value, callback) {
@@ -316,10 +326,17 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
-.user-layout-login {
+<style lang="less" scoped>.user-layout-login {
   label {
     font-size: 14px;
+  }
+
+  /* Input field color change */
+  a-input, a-input-password {
+    color: #dad7b6;
+    &::placeholder {
+      color: #964840;
+    }
   }
 
   .getCaptcha {
@@ -330,6 +347,8 @@ export default {
 
   .forge-password {
     font-size: 14px;
+    background-color: #cbad4a;
+    color: black;
   }
 
   button.login-button {
@@ -337,6 +356,9 @@ export default {
     font-size: 16px;
     height: 40px;
     width: 100%;
+    background-color: #e4d2b5;
+    font-style: italic;
+    color: #6b7338;
   }
 
   .user-login-other {
@@ -359,6 +381,8 @@ export default {
 
     .register {
       float: right;
+      background-color: #cbad4a;
+      color: black;
     }
   }
 }
@@ -366,4 +390,5 @@ export default {
 .main {
   padding-top: 50px;
 }
+
 </style>
