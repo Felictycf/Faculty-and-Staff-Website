@@ -2,8 +2,9 @@
 <template>
   <div class="template">
     <a-row class="header">
-      <img class="bg" :src="userInfo.backgroundImage" alt="Background" />
+      <img class="bg"  :src="userInfo.backgroundImage" alt="Background" />
       <h2>{{ userInfo.firstName }} {{ userInfo.lastName }}</h2>
+
       <div class="avatar-wrapper">
         <img :height="160" :src="userInfo.avatar" alt="User Avatar" />
       </div>
@@ -11,7 +12,7 @@
         <p><b>Tel:</b> {{ userInfo.phone }}</p>
         <p><b>Email:</b> {{ userInfo.email }}</p>
         <p><b>Office:</b> {{ userInfo.location }}</p>
-        <p><b>Contribution:</b> {{ userInfo.contribution }}</p>
+<!--        <p><b>Contribution:</b> {{ userInfo.contribution }}</p>-->
       </div>
     </a-row>
 
@@ -185,16 +186,29 @@ export default {
 
   .bg {
     position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    max-height: 100%;
-    z-index: -1;
+    width: 1100px;
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
+    //left: 0;
+    //right: 0;
+    //top: 0;
+    //bottom: 0;
+    //width: 100%;
+    //height: 100%;
+    //z-index: -1; /* Ensure it's below the content */
+    //object-fit: cover; /* Make sure the image covers the entire space */
+    //object-position: center;
   }
-
+  h2, .avatar-wrapper, .user-info {
+    position: relative; /* 确保它们在背景图片之上 */
+    z-index: 1;
+  }
+  .user-info{
+    color: #FFF;
+  }
   h2 {
+    color: #FFF;
     text-align: center;
     padding-top: 10px;
   }

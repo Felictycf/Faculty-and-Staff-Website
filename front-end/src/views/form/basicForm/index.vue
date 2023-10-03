@@ -104,18 +104,18 @@
           placeholder="Please enter Teaching"
         />
       </a-form-item> -->
-      <a-form-item
-        label="publication"
-        :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"
-        :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"
-      >
-        <a-textarea
-          :auto-size="{ minRows: 2, maxRows: 20 }"
-          v-decorator="['contribution', { rules: [{ required: true }] }]"
-          name="contribution"
-          placeholder="Please enter publication"
-        />
-      </a-form-item>
+<!--      <a-form-item-->
+<!--        label="publication"-->
+<!--        :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"-->
+<!--        :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"-->
+<!--      >-->
+<!--        <a-textarea-->
+<!--          :auto-size="{ minRows: 2, maxRows: 20 }"-->
+<!--          v-decorator="['contribution', { rules: [{ required: true }] }]"-->
+<!--          name="contribution"-->
+<!--          placeholder="Please enter publication"-->
+<!--        />-->
+<!--      </a-form-item>-->
 
       <a-form-item
         label="Bio"
@@ -181,17 +181,17 @@
 <!--        </a-select>-->
 <!--      </a-form-item>-->
 
-      <a-form-item
-        label="Degrees"
-        :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"
-        :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"
-      >
-        <a-input
-          v-decorator="['degtees', { rules: [{ required: true }] }]"
-          name="degtees"
-          placeholder="Please enter Degrees"
-        />
-      </a-form-item>
+<!--      <a-form-item-->
+<!--        label="Degrees"-->
+<!--        :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"-->
+<!--        :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"-->
+<!--      >-->
+<!--        <a-input-->
+<!--          v-decorator="['degtees', { rules: [{ required: true }] }]"-->
+<!--          name="degtees"-->
+<!--          placeholder="Please enter Degrees"-->
+<!--        />-->
+<!--      </a-form-item>-->
 
       <a-form-item
         label="Avibilitiy"
@@ -330,7 +330,8 @@
               >
                 <div v-if="!text2" class="ant-upload-text">Upload</div>
               </a-upload>
-              <img v-else v-if="formValue.img" :src="formValue.img" alt="Uploaded Image" style="width: 100%" />
+<!--              text 2 插槽 渲染数据-->
+              <img v-else v-if="text2" :src="text2" alt="Uploaded Image" style="width: 100%" />
             </template>
 
             <!-- File upload and link for pdf column -->
@@ -343,8 +344,9 @@
                 <button>
                   <a-icon type="upload" /> Upload PDF
                 </button>
+
               </a-upload>
-              <a v-else-if="text2" :href="text2" target="_blank">View PDF</a>
+              <a v-if="text2" :href="text2" target="_blank">View PDF</a>
             </template>
 
             <!-- Default textarea for other columns -->
@@ -356,7 +358,7 @@
               :placeholder="columns2[indx].title"
               @change="(e) => handleRowChange2(e.target.value, record2.key, col2)"
             />
-            <template v-if="col2 !== 'img' && col2 !== 'pdf'">{{ text2 }}</template>
+<!--            <template v-if="col2 !== 'img' && col2 !== 'pdf'">{{ text2 }}</template>-->
           </template>
 
           <template slot="operation" slot-scope="text, record2">
@@ -909,8 +911,8 @@ export default {
 
       axios({
         method: 'post',
-        //url: `http://localhost:3001/api/upLoad/file`,
-         url: `http://47.113.221.19:3001/api/upLoad/file`,
+        url: `http://localhost:3001/api/upLoad/file`,
+        // url: `http://47.113.221.19:3001/api/upLoad/file`,
         data: formData,
         headers: {
           'X-Requested-With': null,
@@ -938,8 +940,8 @@ export default {
 
       axios({
         method: 'post',
-        //url: `http://localhost:3001/api/upLoad/file`,
-         url: `http://47.113.221.19:3001/api/upLoad/file`,
+        url: `http://localhost:3001/api/upLoad/file`,
+        // url: `http://47.113.221.19:3001/api/upLoad/file`,
         data: formData,
         headers: {
           'X-Requested-With': null,
@@ -973,8 +975,8 @@ export default {
 
       axios({
         method: 'post',
-        //url: `http://localhost:3001/api/upLoad/file`,
-         url: `http://47.113.221.19:3001/api/upLoad/file`,
+        url: `http://localhost:3001/api/upLoad/file`,
+      //   url: `http://47.113.221.19:3001/api/upLoad/file`,
         data: formData,
         headers: {
           'X-Requested-With': null,
