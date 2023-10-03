@@ -67,7 +67,7 @@
           <a-row v-for="(item, index) in userInfo.publications" :key="item.time">
             <b>{{ index + 1 }}</b>
 
-            <img :src="item.img" alt="" width="100px" />
+<!--            <img :src="item.img" alt="" width="100px" />-->
             {{ item.time }}
             {{ item.description }}
             <a :href="item.pdf" :download="item.pdf">pdf</a>
@@ -134,8 +134,109 @@ export default {
   -webkit-line-clamp: 2;
 }
 
-.template {
-  background-color: #608ba3b8;
-  padding: 10px;
+/* 基本样式设置 */
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
 }
+
+.template {
+  background-color: #464d63;  // 更亮的背景
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #333;
+  border-bottom: 2px solid #608ba3b8;
+  padding-bottom: 5px;
+}
+
+/* 头像和个人信息 */
+img {
+  //border-radius: 100px;
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+
+  margin-bottom: 20px;
+  border: 4px solid #608ba3b8;
+}
+
+.Departments {
+  font-size: 20px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* 电话和邮箱 */
+a-row {
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+/* Teaching, Degrees, and Academic Position sections */
+.list {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.link-button {
+  display: inline-block;
+  background-color: #4a4a4a;
+  color: white;
+  padding: 5px 15px;
+  margin: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.link-button:hover {
+  background-color: #333333;
+}
+
+/* Publications section */
+.publication-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.publication-item img {
+  margin-right: 20px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.publication-description {
+  flex: 1;
+}
+
+.pdf-link {
+  background-color: #608ba3b8;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.pdf-link:hover {
+  background-color: #4a6d8c;
+}
+
 </style>

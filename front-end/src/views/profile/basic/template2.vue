@@ -86,19 +86,23 @@
               </a-row>
             </a-collapse-panel> -->
 
+            <!-- Publications -->
             <a-collapse-panel key="3" header="Publications">
               <a-row v-for="(item, index) in userInfo.publications" :key="item.time">
-                <a-row>
-                  <b>{{ index + 1 }}</b>
-
-                  <img :src="item.img" alt="" width="100px" />
-                  {{ item.time }}
-                  {{ item.description }}
-                  <a :href="item.pdf" :download="item.pdf">pdf</a>
-                  {{ item.description }}
-                </a-row>
+                <a-col :span="4">
+                  <img :src="item.img" alt="Publication Image" width="120px" height="100px " class="pub-image" />
+                </a-col>
+                <a-col :span="16">
+                  <h3>{{item.title}}</h3>
+<!--                  <b>{{ item.time }}</b>-->
+                  <p class="publication-description">{{ item.description }}</p>
+                </a-col>
+                <a-col :span="4" class="pdf-button-col">
+                  <a :href="item.pdf" :download="item.pdf" class="pdf-button">View PDF</a>
+                </a-col>
               </a-row>
             </a-collapse-panel>
+
             <!-- <a-collapse-panel key="4" header="Academic Position">
               <a-row v-for="(item, index) in userInfo.aacdimicPosition" :key="item.time">
                 <a-row>
@@ -121,19 +125,25 @@
             </a-collapse-panel>
           </a-collapse>
         </a-row>
-        <a-row style="background: #608ba3b8; padding: 10px">
+        <a-row style="background: linear-gradient(145deg, #608ba3b8, #7daac2); padding: 20px 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
           <a-col :span="11">
-            <b>Office: {{ userInfo.location }}</b>
+            <div class="office-info">
+              <b>Office:</b>
+              <span>{{ userInfo.location }}</span>
+            </div>
           </a-col>
           <a-col :span="2">
-            <a-divider type="vertical" style="height: 60px; border-color: black" />
+            <a-divider type="vertical" style="height: 70px; border-color: #444" />
           </a-col>
           <a-col :span="11">
-            <b>Contact:</b>
-            <a-row :span="12">Phone: {{ userInfo.phone }}</a-row>
-            <a-row :span="12">Email: {{ userInfo.email }}</a-row>
+            <div class="contact-info">
+              <b>Contact:</b>
+              <div><a-icon type="phone" /> Phone: {{ userInfo.phone }}</div>
+              <div><a-icon type="mail" /> Email: {{ userInfo.email }}</div>
+            </div>
           </a-col>
         </a-row>
+
       </a-col>
       <a-col :span="8">
         <h2>Recent Highlights</h2>
@@ -146,6 +156,20 @@
           </div>
         </div>
       </a-col>
+      <a-col :span="8">
+        <h2>Personal Link</h2>
+        <div class="link-container">
+          <a :href="userInfo.googleScholarLink" target="_blank" class="link-button">
+            <a-icon type="google" style="color: purple;"></a-icon>
+            Google Scholar
+          </a>
+          <a :href="userInfo.linkedinProfile" target="_blank" class="link-button">
+            <a-icon type="linkedin" theme="filled" style="color: purple;"></a-icon>
+            LinkedIn Profile
+          </a>
+        </div>
+      </a-col>
+
     </a-row>
   </div>
 </template>
@@ -171,6 +195,93 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.link-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.link-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f5f5f5;
+  padding: 8px 15px;
+  border-radius: 5px;
+  color: #555;
+  text-decoration: none;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #e5e5e5;
+  }
+
+  a-icon {
+    font-size: 20px;
+  }
+}
+
+.office-info, .contact-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  font-size: 16px;
+}
+
+.office-info > b, .contact-info > b {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.contact-info > div {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+a-icon {
+  margin-right: 8px;
+  color: #fff;
+  font-size: 18px;
+}
+
+.pub-image {
+  object-fit: cover; // 保持原图的纵横比并裁切多余部分
+  padding-right: 10px;
+}
+
+/* Publications 样式 */
+.publication-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; // 只显示三行内容
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.pdf-button-col {
+  display: flex;
+  align-items: center; // 垂直居中对齐按钮
+}
+
+.pdf-button {
+  display: inline-block;
+  background-color: #6bc3df; // 使用之前的颜色进行一致性设计
+  color: white;
+  padding: 5px 15px;
+  border-radius: 4px;
+  transition: background-color 0.2s; // 轻微过渡效果
+  text-decoration: none; // 去除默认的下划线
+  text-align: center;
+}
+
+.pdf-button:hover {
+  background-color: #549cae; // 悬停时稍微深色
+}
+
 
 body {
   font-family: 'Arial', sans-serif;
