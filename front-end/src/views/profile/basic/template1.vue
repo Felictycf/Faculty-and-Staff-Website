@@ -9,7 +9,7 @@
         <img :height="160" :src="userInfo.avatar" alt="User Avatar" />
       </div>
       <div class="user-info">
-        <p><b>Tel:</b> {{ userInfo.phone }}</p>
+        <p ><b>Tel:</b> {{ userInfo.phone }}</p>
         <p><b>Email:</b> {{ userInfo.email }}</p>
         <p><b>Office:</b> {{ userInfo.location }}</p>
 <!--        <p><b>Contribution:</b> {{ userInfo.contribution }}</p>-->
@@ -79,18 +79,23 @@
           </a-timeline>
         </a-tab-pane>
         <a-tab-pane key="3" tab="Publication">
-          <a-row :gutter="{ xs: 8, sm: 16, md: 24, lg: 32 }"> <!-- Gutter to add spacing between grid columns -->
-            <a-col v-for="(item, index) in userInfo.publications" :key="item.time" span="8">
+          <a-carousel ref="carousel">
+          <a-row :gutter="{ xs: 8, sm: 16, md: 24, lg: 32 }" v-for="page in groupedPublications" :key="page[0].time" > <!-- Gutter to add spacing between grid columns -->
+            <a-col v-for="(item, index) in page" :key="item.time" span="8">
               <div class="publication-item">
                 <img :src="item.img" alt="" class="publication-img" />
                 <div class="publication-data">
-                  <div class="time">{{ item.time }}</div>
+                  <h1>{{ item.title }}</h1>
+                  <div class="time">time : {{ item.time }}</div>
                   <div class="description">{{ item.description }}</div>
-                  <a class="pdf-link" :href="item.pdf" :download="item.pdf">View PDF</a>
+                  <a class="pdf-link" :href="item.pdf" :download="item.pdf">Read the full article</a>
                 </div>
               </div>
             </a-col>
           </a-row>
+          </a-carousel>
+<!--          <a-button @click="prevPublication" class="carousel-btn prev-btn">⬅️</a-button>-->
+<!--          <a-button @click="nextPublication" class="carousel-btn next-btn">➡️</a-button>-->
         </a-tab-pane>
 
 
@@ -112,6 +117,24 @@ export default {
   data() {
     return {}
   },
+  computed: {
+    groupedPublications() {
+      const groupSize = 3;
+      const groups = [];
+      for (let i = 0; i < this.userInfo.publications.length; i += groupSize) {
+        groups.push(this.userInfo.publications.slice(i, i + groupSize));
+      }
+      return groups;
+    },
+  },
+  methods: {
+    nextPublication() {
+      this.$refs.carousel.next();
+    },
+    prevPublication() {
+      this.$refs.carousel.prev();
+    },
+  },
   props: {
     userInfo: {
       type: Object,
@@ -126,6 +149,24 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.prev-btn {
+  left: 0;
+}
+
+.next-btn {
+  right: 0;
+}
+
+
 
                      /* ... your existing styles ... */
                      .publication-item {
@@ -148,7 +189,7 @@ export default {
                      }
                    .publication-data {
                      background-color: #e3e5e5;
-                     padding: 50px;
+                     padding: 20px;
                      display: flex;
                      flex-direction: column; // Ensures vertical layout of content
                      justify-content: space-between; // Distributes the space evenly between the contents
@@ -156,21 +197,43 @@ export default {
 
                      .time {
                        font-weight: bold; // Makes the title stand out
-                       margin-bottom: 10px; // Add some space between title and description
+                       margin-bottom: 2px; // Add some space between title and description
                      }
 
                      .description {
-                       flex: 1; // Allows it to take up remaining space
-                       margin-bottom: 10px; // Add some space between description and link
+                       //flex: 1; // Allows it to take up remaining space
+                       //margin-bottom: 10px; // Add some space between description and link
+                       max-height: 150px;  /* 为描述设置一个最大高度 */
+                       overflow: hidden;  /* 隐藏溢出的内容 */
+                       position: relative; /* 需要定位其伪类 */
+                       padding-bottom: 25px;  /* 为 "View PDF" 按钮预留空间 */
+                     }
+                     .description::after {
+                       content: "..."; /* 添加省略号 */
+                       position: absolute;  /* 绝对定位 */
+                       bottom: 0;
+                       right: 0;
+                       background-color: #e3e5e5;  /* 与卡片背景相同的颜色 */
+                       padding-left: 5px;  /* 确保省略号与文本有些许间隔 */
                      }
 
                      .pdf-link {
+                       position: absolute;  /* 绝对定位按钮确保它始终在底部 */
+                       bottom: 10px;  /* 与底部有10px的间隔 */
+                       left: 50%;  /* 中心对齐按钮 */
+                       transform: translateX(-50%);  /* 使用变换来完美居中 */
                        align-self: center; // Centers the link
                        background-color: #333; // Dark background for the link
                        color: #fff; // White text
                        padding: 5px 10px; // Some padding to make it look nice
                        text-decoration: none; // Remove underline
                        border-radius: 4px; // Rounded corners
+
+
+                       //background-image: url('../../../assets/jiuantou.png'); /* 请替换为您的图片路径 */
+                       //background-repeat: no-repeat; /* 确保图片不重复 */
+                       //background-position: left center; /* 图片居左居中对齐 */
+                       //padding-left: 10px; /* 如果箭头宽度约为20px，这会为图片提供空间并避免文本与图片重叠 */
                        &:hover {
                          background-color: #555; // Change background on hover
                        }
@@ -206,11 +269,20 @@ export default {
   }
   .user-info{
     color: #FFF;
+    text-align: left;  // Change center alignment to left
+    font-size: 20px;
+    padding-left: 20px;  // Add some padding on the left for consistency
+    p {
+      margin-bottom: 15px;
+      
+
+    }
   }
   h2 {
     color: #FFF;
-    text-align: center;
+    text-align: left;  // Change center alignment to left
     padding-top: 10px;
+    padding-left: 20px;  // Add some padding on the left to keep it tidy
   }
 
   .avatar-wrapper {
@@ -219,12 +291,6 @@ export default {
     padding: 20px 0;
   }
 
-  .user-info {
-    text-align: center;
-    font-size: 20px;
-    p {
-      margin-bottom: 15px;
-    }
-  }
+
 }
 </style>
