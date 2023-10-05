@@ -55,14 +55,14 @@
           <h2 style="margin-top: 30px ;color: #000;"><a-icon type="idcard" /> Academic Position</h2>
           <a-row v-for="(item, index) in userInfo.aacdimicPosition" :key="item.time">
             <a-row>
-              <b>{{ index + 1 }}</b>
+              <b>{{  index + 1 }}</b>
               {{ item.description }}
               {{ item.time }}
             </a-row>
           </a-row>
           <h2 style="margin-top: 30px;color: #000;"><a-icon type="book-open" /> Publications</h2>
-          <a-row v-for="(item, index) in userInfo.publications" :key="item.time">
-            <b>{{ index + 1 }}</b>
+          <a-row v-for="(item, index) in currentPublications" :key="item.time">
+            <b>{{ currentIndex+index + 1 }}</b>
 
 <!--            <img :src="item.img" alt="" width="100px" />-->
             {{ item.title }}
@@ -71,11 +71,19 @@
             <a :href="item.pdf" :download="item.pdf">pdf</a>
 
           </a-row>
+          <div class="button-container">
+            <a-button @click="prevPublication" >
+              <a-icon type="left" />
+            </a-button>
+            <a-button @click="nextPublication" >
+              <a-icon type="right" />
+            </a-button>
+          </div>
         </div>
       </a-col>
 
       <a-col :span="8" style="padding: 0 20px">
-        <h2 style="font-family: 'Arial', sans-serif; color: #4A90E2; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); margin-bottom: 10px; border-bottom: 2px solid #ECECEC; padding-bottom: 8px;">Recent Highlights</h2>
+        <h2 style="font-family: 'Arial', sans-serif; color: #c7d3e1; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); margin-bottom: 10px; border-bottom: 2px solid #ECECEC; padding-bottom: 8px;">Recent Highlights</h2>
 
         <div class="list">
           <div class="item" style="margin-bottom: 30px" v-for="item in userInfo.highlights" :key="item.time">
@@ -84,12 +92,12 @@
           </div>
         </div>
 
-        <h2 style="font-family: 'Arial', sans-serif; color: #4A90E2; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); margin-bottom: 10px; border-bottom: 2px solid #ECECEC; padding-bottom: 8px;">  Fields of research</h2>
+        <h2 style="font-family: 'Arial', sans-serif; color: #b3c8e1; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); margin-bottom: 10px; border-bottom: 2px solid #ECECEC; padding-bottom: 8px;">  Fields of research</h2>
 
 
         <div>{{ userInfo.researchAreas }}</div>
 
-        <h2 style="font-family: 'Arial', sans-serif; color: #4A90E2; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); margin-bottom: 10px; border-bottom: 2px solid #ECECEC; padding-bottom: 8px;">Availability</h2>
+        <h2 style="font-family: 'Arial', sans-serif; color: #b2c6e0; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); margin-bottom: 10px; border-bottom: 2px solid #ECECEC; padding-bottom: 8px;">Availability</h2>
 
         <div>{{ userInfo.avibilitiy }}</div>
 
@@ -106,6 +114,34 @@
 
 <script>
 export default {
+  data(){
+    return{
+      currentIndex: 0,
+    }
+  },
+  computed: {
+    currentPublications() {
+      return this.userInfo.publications.slice(this.currentIndex, this.currentIndex + 3);
+    },
+    // ...其他计算属性...
+  },
+  methods: {
+    nextPublication() {
+      if (this.currentIndex + 3 < this.userInfo.publications.length) {
+        this.currentIndex += 3;
+      } else {
+        this.currentIndex = 0; // 从头开始
+      }
+    },
+    prevPublication() {
+      if (this.currentIndex > 0) {
+        this.currentIndex -= 3;
+      } else {
+        this.currentIndex = Math.floor((this.userInfo.publications.length - 1) / 3) * 3; // 跳转到最后一个组
+      }
+    },
+    // ...其他方法...
+  },
   props: {
     userInfo: {
       type: Object,

@@ -50,7 +50,8 @@ router.post('/api/upLoad/file', Up.upLoadImg); //这个为上传的API
 
 // 连接数据库
 mongoose
-  .connect('mongodb://127.0.0.1:27017/teacher-system', { useNewUrlParser: true })
+    .connect('mongodb://47.113.221.19:27017/teacher-system', { useNewUrlParser: true })
+    // .connect('mongodb://127.0.0.1:27017/teacher-system', { useNewUrlParser: true })
   .then(() => {
     console.log('Mongodb Connectd...');
     // 这里进行本分数据的初始化

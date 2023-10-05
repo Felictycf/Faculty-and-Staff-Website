@@ -78,9 +78,8 @@
           </a-timeline>
         </a-tab-pane>
         <a-tab-pane key="3" tab="Publication">
-          <a-carousel ref="carousel">
-          <a-row :gutter="{ xs: 8, sm: 16, md: 24, lg: 32 }" v-for="page in groupedPublications" :key="page[0].time" > <!-- Gutter to add spacing between grid columns -->
-            <a-col v-for="(item, index) in page" :key="item.time" span="8">
+          <a-row :gutter="{ xs: 8, sm: 16, md: 24, lg: 32 }"  > <!-- Gutter to add spacing between grid columns -->
+            <a-col v-for="(item, index) in visiblePublications" :key="item.time" span="8">
               <div class="publication-item">
                 <img :src="item.img" alt="" class="publication-img" />
                 <div class="publication-data">
@@ -92,8 +91,18 @@
               </div>
             </a-col>
           </a-row>
-          </a-carousel>
-<!--          <a-button @click="prevPublication" class="carousel-btn prev-btn">⬅️</a-button>-->
+          <div class="button-container">
+            <a-button @click="prevPublication">
+              <a-icon type="left" />
+            </a-button>
+            <a-button @click="nextPublication">
+              <a-icon type="right" />
+            </a-button>
+          </div>
+
+
+
+          <!--          <a-button @click="prevPublication" class="carousel-btn prev-btn">⬅️</a-button>-->
 <!--          <a-button @click="nextPublication" class="carousel-btn next-btn">➡️</a-button>-->
         </a-tab-pane>
 
@@ -124,26 +133,46 @@
 
 export default {
   data() {
-    return {}
+    return {
+      currentIndex: 0
+    }
   },
   computed: {
+    visiblePublications() {
+      return this.userInfo.publications.slice(this.currentIndex, this.currentIndex + 3);
+    },
     groupedPublications() {
       const groupSize = 3;
       const groups = [];
+      console.log("userinfo")
+      console.log(this.userInfo)
       for (let i = 0; i < this.userInfo.publications.length; i += groupSize) {
+        console.log(this.userInfo)
         groups.push(this.userInfo.publications.slice(i, i + groupSize));
       }
+      console.log("groups")
+      console.log(groups)
       return groups;
     },
   },
   methods: {
     nextPublication() {
-      this.$refs.carousel.next();
+      if (this.currentIndex + 3 >= this.userInfo.publications.length) {
+        this.currentIndex = 0;  // 回到开始
+      } else {
+        this.currentIndex += 3;
+      }
     },
     prevPublication() {
-      this.$refs.carousel.prev();
-    },
+      if (this.currentIndex - 3 < 0) {
+        // 回到最后一组，保证它是3的倍数
+        this.currentIndex = Math.floor((this.userInfo.publications.length - 1) / 3) * 3;
+      } else {
+        this.currentIndex -= 3;
+      }
+    }
   },
+
   props: {
     userInfo: {
       type: Object,
@@ -159,6 +188,13 @@ export default {
 
 <style lang="less" scoped>
 /* ... your existing styles ... */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;  /* 这将为按钮添加20px的间隔 */
+  margin-top: 20px; /* 如果需要，增加上部间隔 */
+}
 
 .highlight-wrapper {
   margin: 20px 0;

@@ -88,7 +88,7 @@
 
             <!-- Publications -->
             <a-collapse-panel key="3" header="Publications">
-              <a-row v-for="(item, index) in userInfo.publications" :key="item.time">
+              <a-row v-for="(item, index) in currentPublications" :key="item.time">
                 <a-col :span="4">
                   <img :src="item.img" alt="Publication Image" width="120px" height="100px " class="pub-image" />
                 </a-col>
@@ -101,6 +101,14 @@
                   <a :href="item.pdf" :download="item.pdf" class="pdf-button">View PDF</a>
                 </a-col>
               </a-row>
+              <div class="button-container">
+                <a-button @click="prevPublication">
+                  <a-icon type="left" />
+                </a-button>
+                <a-button @click="nextPublication">
+                  <a-icon type="right" />
+                </a-button>
+              </div>
             </a-collapse-panel>
 
             <!-- <a-collapse-panel key="4" header="Academic Position">
@@ -143,7 +151,15 @@
             </div>
           </a-col>
         </a-row>
-
+<br/>
+        <a-row style="background: linear-gradient(145deg, #608ba3b8, #7daac2); padding: 10px 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+          <a-col :span="20">
+            <div class="contact-info">
+              <b>Correspondence:</b>
+              <div> {{ userInfo.contribution }}</div>
+            </div>
+          </a-col>
+        </a-row>
       </a-col>
       <a-col :span="8">
         <h2>Recent Highlights</h2>
@@ -178,7 +194,30 @@ export default {
   data() {
     return {
       text: 'sdfsdfsd',
+      currentIndex: 0,
     }
+  },
+  computed: {
+    currentPublications() {
+      return this.userInfo.publications.slice(this.currentIndex, this.currentIndex + 3);
+    },
+    // ...其他计算属性...
+  },
+  methods: {
+    nextPublication() {
+      if (this.currentIndex + 3 < this.userInfo.publications.length) {
+        this.currentIndex += 3;
+      } else {
+        this.currentIndex = 0; // 从头开始
+      }
+    },
+    prevPublication() {
+      if (this.currentIndex > 0) {
+        this.currentIndex -= 3;
+      } else {
+        this.currentIndex = Math.floor((this.userInfo.publications.length - 1) / 3) * 3; // 跳转到最后一个组
+      }
+    },
   },
   components: {},
   props: {
@@ -190,6 +229,7 @@ export default {
       type: Array,
       default: () => [],
     },
+
   },
 }
 </script>
@@ -228,7 +268,6 @@ export default {
   height: 100%;
   font-size: 16px;
 }
-
 .office-info > b, .contact-info > b {
   font-size: 18px;
   color: #fff;

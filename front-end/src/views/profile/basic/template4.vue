@@ -24,9 +24,6 @@
               Email: {{ userInfo.email }}
             </a-row>
             <a-row>
-              <p>Availability:{{ userInfo.avibilitiy }}</p>
-            </a-row>
-            <a-row>
               <p>Office:{{ userInfo.location }}</p>
             </a-row>
           </a-col>
@@ -66,18 +63,33 @@
 
       <a-col :span="11" :offset="1">
         <h2><a-icon type="book-open" /> Publication</h2>
-        <a-row v-for="(item, index) in userInfo.publications" :key="item.time">
-          <b>{{ index + 1 }}</b>
+        <a-row v-for="(item, index) in currentPublications" :key="item.time">
+          <b>{{ currentIndex +index + 1 }}</b>
           <img :src="item.img" alt="" width="100px" />
 
            {{item.title}}
-         
+
           <br/>
 
           {{ item.time }}
           <div class="limited-description">{{ item.description }}</div>
           <a :href="item.pdf" :download="item.pdf">pdf</a>
         </a-row>
+        <div class="button-container">
+          <a-button @click="prevPublication" >
+            <a-icon type="left" />
+          </a-button>
+          <a-button @click="nextPublication" >
+            <a-icon type="right" />
+          </a-button>
+        </div>
+        <a-row>
+          <h2> <a-icon type="calendar" />Availability:</h2>
+          <div class="availability-box">
+            <p>{{ userInfo.avibilitiy }}</p>
+          </div>
+        </a-row>
+
       </a-col>
     </a-row>
   </div>
@@ -85,6 +97,18 @@
 
 <script>
 export default {
+  data(){
+    return{
+      currentIndex: 0,
+    }
+  },
+  computed: {
+    currentPublications() {
+      return this.userInfo.publications.slice(this.currentIndex, this.currentIndex + 3);
+    },
+    // ...其他计算属性...
+  },
+
   props: {
     userInfo: {
       type: Object,
@@ -96,6 +120,20 @@ export default {
     },
   },
   methods: {
+    nextPublication() {
+      if (this.currentIndex + 3 < this.userInfo.publications.length) {
+        this.currentIndex += 3;
+      } else {
+        this.currentIndex = 0; // 从头开始
+      }
+    },
+    prevPublication() {
+      if (this.currentIndex > 0) {
+        this.currentIndex -= 3;
+      } else {
+        this.currentIndex = Math.floor((this.userInfo.publications.length - 1) / 3) * 3; // 跳转到最后一个组
+      }
+    },
     toDetail(id) {
       this.$router.push({
         path: '/profile/basic',
@@ -178,4 +216,13 @@ a-icon {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
 }
+.availability-box {
+  border: 2px solid #e7e7e7;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+  overflow: auto;
+  //max-height: 150px; // 根据需要可以更改这个值
+}
+
 </style>
