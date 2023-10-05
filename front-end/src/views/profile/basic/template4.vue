@@ -11,22 +11,23 @@
             <img :width="200" :src="userInfo.avatar" />
 
             <a-row>
-              <div class="date">{{ userInfo.date }}</div>
+<!--              <div class="date">{{ userInfo.date }}</div>-->
             </a-row>
           </a-col>
           <a-col :span="12">
-            <a-row>
+            <a-row class="contact-info">
               <a-icon type="phone" />
               Phone: {{ userInfo.phone }}
             </a-row>
-            <a-row>
+            <a-row class="contact-info">
               <a-icon type="mail" />
               Email: {{ userInfo.email }}
             </a-row>
-            <a-row>
-              <p>Office:{{ userInfo.location }}</p>
+            <a-row class="contact-info">
+              <p>Office: {{ userInfo.location }}</p>
             </a-row>
           </a-col>
+
         </a-row>
 
         <a-row>
@@ -41,8 +42,9 @@
           </div>
         </a-row>
         <a-row>
-          <a-col :span="12">Degtees: {{ userInfo.degtees }}</a-col>
-          <a-col :span="12">Bio: {{ userInfo.bio }}</a-col>
+          <h2><a-icon type="menu-unfold" /> Bio</h2>
+<!--          <a-col :span="12">Degtees: {{ userInfo.degtees }}</a-col>-->
+          <a-col :span="20">{{ userInfo.bio }}</a-col>
         </a-row>
         <br />
         <a-row>
@@ -62,7 +64,7 @@
       </a-col>
 
       <a-col :span="11" :offset="1">
-        <h2><a-icon type="book-open" /> Publication</h2>
+        <h2><a-icon type="file-text" /> Publication</h2>
         <a-row v-for="(item, index) in currentPublications" :key="item.time">
           <b>{{ currentIndex +index + 1 }}</b>
           <img :src="item.img" alt="" width="100px" />
@@ -71,7 +73,7 @@
 
           <br/>
 
-          {{ item.time }}
+          <b>{{ item.time }}</b>
           <div class="limited-description">{{ item.description }}</div>
           <a :href="item.pdf" :download="item.pdf">pdf</a>
         </a-row>
@@ -150,6 +152,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.contact-info {
+  font-size: 20px;      /* 调大字体大小 */
+  margin-bottom: 15px; /* 增加间隔 */
+}
+
+.contact-info a-icon {
+  margin-right: 8px;   /* 图标和文本之间的间隔 */
+}
+
 body {
   font-family: 'Arial', sans-serif;
   line-height: 1.6;

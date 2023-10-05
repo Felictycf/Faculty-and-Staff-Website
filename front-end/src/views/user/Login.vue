@@ -18,11 +18,11 @@
         <a-input
           size="large"
           type="text"
-          placeholder="account name"
+          placeholder="Account Email"
           v-decorator="[
             'username',
             {
-              rules: [{ required: true, message: 'account name' }, { validator: handleUsernameOrEmail }],
+              rules: [{ required: true, message: 'Account Email' }, { validator: handleUsernameOrEmail }],
               validateTrigger: 'change',
             },
           ]"

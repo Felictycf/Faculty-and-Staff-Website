@@ -8,7 +8,7 @@
         <a-input
           size="large"
           type="text"
-          placeholder="account name"
+          placeholder="Account Email"
           v-decorator="[
             'email',
             {

@@ -12,6 +12,9 @@
         <p ><b> Tel <a-icon type="phone"  /> :</b> {{ userInfo.phone }}</p>
         <p><b>Email <a-icon type="message" />:</b> {{ userInfo.email }}</p>
         <p><b>Office:</b> {{ userInfo.location }}</p>
+        <a-col :span="20">
+        <p><b>Correspondence:</b> {{ userInfo.contribution }}</p>
+        </a-col>
 <!--        <p><b>Contribution:</b> {{ userInfo.contribution }}</p>-->
       </div>
     </a-row>
@@ -402,7 +405,7 @@ export default {
     font-size: 20px;
     padding-left: 20px;  // Add some padding on the left for consistency
     p {
-      margin-bottom: 15px;
+      margin-bottom: 5px;
       font-size: 15px;
 
     }

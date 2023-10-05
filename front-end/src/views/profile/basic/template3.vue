@@ -57,7 +57,7 @@
             <a-row>
               <b>{{  index + 1 }}</b>
               {{ item.description }}
-              {{ item.time }}
+              <b>{{ item.time }}</b>
             </a-row>
           </a-row>
           <h2 style="margin-top: 30px;color: #000;"><a-icon type="book-open" /> Publications</h2>
@@ -66,7 +66,7 @@
 
 <!--            <img :src="item.img" alt="" width="100px" />-->
             {{ item.title }}
-            {{ item.time }}
+            <b>{{ item.time }}</b>
             <div class="limited-description">{{ item.description }}</div>
             <a :href="item.pdf" :download="item.pdf">pdf</a>
 
@@ -83,7 +83,7 @@
       </a-col>
 
       <a-col :span="8" style="padding: 0 20px">
-        <h2 style="font-family: 'Arial', sans-serif; color: #c7d3e1; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); margin-bottom: 10px; border-bottom: 2px solid #ECECEC; padding-bottom: 8px;">Recent Highlights</h2>
+        <h2 style="font-family: 'Arial', sans-serif; color: #fdfdfd; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); margin-bottom: 10px; border-bottom: 2px solid #ECECEC; padding-bottom: 8px;">Recent Highlights</h2>
 
         <div class="list">
           <div class="item" style="margin-bottom: 30px" v-for="item in userInfo.highlights" :key="item.time">
@@ -92,12 +92,12 @@
           </div>
         </div>
 
-        <h2 style="font-family: 'Arial', sans-serif; color: #b3c8e1; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); margin-bottom: 10px; border-bottom: 2px solid #ECECEC; padding-bottom: 8px;">  Fields of research</h2>
+        <h2 style="font-family: 'Arial', sans-serif; color: #eeeff1; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); margin-bottom: 10px; border-bottom: 2px solid #ECECEC; padding-bottom: 8px;">  Fields of research</h2>
 
 
         <div>{{ userInfo.researchAreas }}</div>
 
-        <h2 style="font-family: 'Arial', sans-serif; color: #b2c6e0; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); margin-bottom: 10px; border-bottom: 2px solid #ECECEC; padding-bottom: 8px;">Availability</h2>
+        <h2 style="font-family: 'Arial', sans-serif; color: #ffffff; font-size: 28px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); margin-bottom: 10px; border-bottom: 2px solid #ECECEC; padding-bottom: 8px;">Availability</h2>
 
         <div>{{ userInfo.avibilitiy }}</div>
 
