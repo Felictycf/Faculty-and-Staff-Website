@@ -82,17 +82,17 @@
 <!--          placeholder="Please enter Department"-->
 <!--        />-->
 <!--      </a-form-item>-->
-      <a-form-item
-        label="Contact"
-        :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"
-        :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"
-      >
-        <a-input
-          v-decorator="['contact', { rules: [{ required: true }] }]"
-          name="contact"
-          placeholder="Please enter Contact"
-        />
-      </a-form-item>
+<!--      <a-form-item-->
+<!--        label="Contact"-->
+<!--        :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"-->
+<!--        :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"-->
+<!--      >-->
+<!--        <a-input-->
+<!--          v-decorator="['contact', { rules: [{ required: true }] }]"-->
+<!--          name="contact"-->
+<!--          placeholder="Please enter Contact"-->
+<!--        />-->
+<!--      </a-form-item>-->
       <!-- <a-form-item
         label="Teaching"
         :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"
@@ -931,8 +931,8 @@ export default {
 
       axios({
         method: 'post',
-        //url: `http://localhost:3001/api/upLoad/file`,
-         url: `http://47.113.221.19:3001/api/upLoad/file`,
+        url: `http://localhost:3001/api/upLoad/file`,
+         //url: `http://47.113.221.19:3001/api/upLoad/file`,
         data: formData,
         headers: {
           'X-Requested-With': null,
@@ -960,8 +960,8 @@ export default {
 
       axios({
         method: 'post',
-      //  url: `http://localhost:3001/api/upLoad/file`,
-         url: `http://47.113.221.19:3001/api/upLoad/file`,
+        url: `http://localhost:3001/api/upLoad/file`,
+        // url: `http://47.113.221.19:3001/api/upLoad/file`,
         data: formData,
         headers: {
           'X-Requested-With': null,
@@ -995,8 +995,8 @@ export default {
 
       axios({
         method: 'post',
-       // url: `http://localhost:3001/api/upLoad/file`,
-         url: `http://47.113.221.19:3001/api/upLoad/file`,
+        url: `http://localhost:3001/api/upLoad/file`,
+      //   url: `http://47.113.221.19:3001/api/upLoad/file`,
         data: formData,
         headers: {
           'X-Requested-With': null,

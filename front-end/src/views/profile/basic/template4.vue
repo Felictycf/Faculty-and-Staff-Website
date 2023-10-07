@@ -49,8 +49,14 @@
         <br />
         <a-row>
           <h2><a-icon type="experiment" /> Fields of research</h2>
-          <div>{{ userInfo.researchAreas }}</div>
+          <a-col :span="12">
+            <div>{{ researchLeft }}</div>
+          </a-col>
+          <a-col :span="13">
+            <div>{{ researchRight }}</div>
+          </a-col>
         </a-row>
+
         <br />
 
         <a-row>
@@ -88,9 +94,13 @@
         <a-row>
           <h2> <a-icon type="calendar" />Availability:</h2>
           <div class="availability-box">
-            <p>{{ userInfo.avibilitiy }}</p>
+            <ol>
+              <li v-for="time in userInfo.avibilitiy.split(',')" :key="time">{{ time.trim() }}</li>
+            </ol>
           </div>
         </a-row>
+
+
 
       </a-col>
     </a-row>
@@ -105,6 +115,24 @@ export default {
     }
   },
   computed: {
+    researchLeft() {
+      const splits = this.userInfo.researchAreas.split('and');
+      return splits[0] ? splits[0].trim() : '';
+    },
+    researchRight() {
+      const splits = this.userInfo.researchAreas.split('and');
+      return splits[1] ? splits[1].trim() : '';
+    },
+    availabilityLeft() {
+      console.log("data")
+      console.log(this.userInfo)
+      const splits = this.userInfo.avibilitiy.split(',');
+      return splits.slice(0, Math.ceil(splits.length / 2)).join(' ');
+    },
+    availabilityRight() {
+      const splits = this.userInfo.avibilitiy.split(',');
+      return splits.slice(Math.ceil(splits.length / 2)).join(' ');
+    },
     currentPublications() {
       return this.userInfo.publications.slice(this.currentIndex, this.currentIndex + 3);
     },
@@ -234,6 +262,27 @@ a-icon {
   margin-top: 10px;
   overflow: auto;
   //max-height: 150px; // 根据需要可以更改这个值
+
+}
+.availability-box ol {
+  list-style-type: none;  /* 移除默认的数字 */
+
+  li {
+    position: relative;
+    padding-left: 25px;   /* 留出空间给圆点 */
+
+    &:before {
+      content: "";        /* 创建一个实心圆 */
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 10px;
+      background-color: black;
+      border-radius: 50%;
+    }
+  }
 }
 
 </style>

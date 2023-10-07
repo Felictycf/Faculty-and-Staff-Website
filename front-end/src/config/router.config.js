@@ -34,6 +34,12 @@ export const asyncRouterMap = [
         component: () => import('@/views/profile/advanced/Advanced'),
         meta: { title: 'Template Choose', permission: ['profile'] },
       },
+      {
+        path: '/profile/about',
+        name: 'ProfileAbout',
+        component: () => import('@/views/about'),
+        meta: { title: 'About', permission: ['profile'] },
+      },
 
       // dashboard
       {

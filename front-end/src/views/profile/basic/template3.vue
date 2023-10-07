@@ -1,7 +1,52 @@
 <!-- 功能代码模版选择4-->
-<template>
+<template >
+  <div :class="[currentStyle, currentFont, currentTitleColor, currentTitleSize,currentColor]">
+    <div :class="currentFont">
+
+
+      <select v-model="currentStyle">
+        <option v-for="font in fontList" :key="font.name" :value="font.className">{{ font.name }}</option>
+      </select>
+      <div>
+        <label>Background Color:</label>
+        <select v-model="currentBG" >
+          <option v-for="bg in bgList" :key="bg.name" :value="bg.className">{{ bg.name }}</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Font Size:</label>
+        <select v-model="currentFont" >
+          <option v-for="size in fontSizeList" :key="size.name" :value="size.className">{{ size.name }}</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Title Color:</label>
+        <select v-model="currentTitleColor">
+          <option v-for="color in titleColorList" :key="color.name" :value="color.className">{{ color.name }}</option>
+        </select>
+      </div>
+      <div>
+        <label>Title Font Size:</label>
+        <select v-model="currentTitleSize">
+          <option v-for="size in titleSizeList" :key="size.name" :value="size.className">{{ size.name }}</option>
+        </select>
+      </div>
+      <div>
+        <label>Color:</label>
+        <select v-model="currentColor">
+          <option v-for="color in colorList" :key="color.name" :value="color.className">{{ color.name }}</option>
+        </select>
+      </div>
+
+
+
+
+      <div :class="currentBG">
   <div class="template">
     <h2 style="text-align: center; font-size: 30px">Academic Staff webpage</h2>
+
     <a-row :gutter="2">
       <a-col :span="8">
         <img :width="200" :src="userInfo.avatar" />
@@ -39,8 +84,6 @@
             </li>
           </ul>
         </a-row>
-
-
       </a-col>
       <a-col :span="8" style="background-color: white; padding: 20px">
         <div class="list">
@@ -63,14 +106,12 @@
           <h2 style="margin-top: 30px;color: #000;"><a-icon type="book-open" /> Publications</h2>
           <a-row v-for="(item, index) in currentPublications" :key="item.time">
             <b>{{ currentIndex+index + 1 }}</b>
-
-<!--            <img :src="item.img" alt="" width="100px" />-->
             {{ item.title }}
             <b>{{ item.time }}</b>
             <div class="limited-description">{{ item.description }}</div>
             <a :href="item.pdf" :download="item.pdf">pdf</a>
-
           </a-row>
+
           <div class="button-container">
             <a-button @click="prevPublication" >
               <a-icon type="left" />
@@ -110,13 +151,75 @@
       </a-col>
     </a-row>
   </div>
+  </div>
+  </div>
+  </div>
 </template>
 
 <script>
 export default {
   data(){
     return{
+      currentTitleColor: 'default-color',
+      currentTitleSize: 'default-size',
+      currentColor: 'default-color',
+      colorList: [
+        { name: 'Default', className: 'default-color' },
+        { name: 'Green', className: 'green-color' },
+        //... 其他颜色
+      ],
+      titleColorList: [
+        { name: 'Default', className: 'default-color' },
+        { name: 'Red', className: 'red-color' },
+        { name: 'Blue', className: 'blue-color' },
+        //... 其他颜色
+      ],
+      titleSizeList: [
+        { name: 'Default', className: 'default-size' },
+        { name: 'Large', className: 'large-title' },
+        { name: 'Extra Large', className: 'xlarge-title' },
+        //... 其他大小
+      ],
+      currentBG:'blue-bg',
+      currentFont:'small-font',
+      bgColor: '#ffffff', // 默认为白色
+      fontSize: '16px',     // 默认为16px，注意这里是字符串格式
       currentIndex: 0,
+      currentStyle: 'arial-style',
+      fontList: [
+        { name: 'Arial', className: 'arial-style' },
+        { name: 'Verdana', className: 'verdana-style' },
+        { name: 'Georgia', className: 'georgia-style' },
+        { name: 'Courier New', className: 'courier-style' },
+        { name: 'Comic Sans MS', className: 'comicSansMS-style' },
+        { name: 'Times New Roman', className: 'timesNewRoman-style' },
+        { name: 'Trebuchet MS', className: 'trebuchetMS-style' },
+        { name: 'Tahoma', className: 'tahoma-style' },
+        { name: 'Lucida Sans Unicode', className: 'lucidaSans-style' },
+        { name: 'Impact', className: 'impact-style' },
+        { name: 'Helvetica', className: 'helvetica-style' },
+        { name: 'Gill Sans', className: 'gillSans-style' },
+        { name: 'Franklin Gothic', className: 'franklinGothic-style' },
+        { name: 'Calibri', className: 'calibri-style' },
+        { name: 'Cambria', className: 'cambria-style' },
+        { name: 'Baskerville', className: 'baskerville-style' },
+        { name: 'Avant Garde', className: 'avantGarde-style' },
+        { name: 'Arial Narrow', className: 'arialNarrow-style' },
+        { name: 'Arial Black', className: 'arialBlack-style' },
+        { name: 'Anton', className: 'anton-style' }
+      ],
+      bgList: [
+            { name: 'White', className: 'white-bg' },
+            { name: 'Black', className: 'black-bg' },
+        { name: 'Blue', className: 'blue-bg' },
+            //... 其他颜色
+        ],
+        fontSizeList: [
+            { name: '12px', className: 'small-font' },
+            { name: '16px', className: 'medium-font' },
+            { name: '20px', className: 'large-font' },
+            //... 其他大小
+        ]
     }
   },
   computed: {
@@ -125,7 +228,22 @@ export default {
     },
     // ...其他计算属性...
   },
+  mounted() {
+    this.changeFont();  // 默认设置
+  },
   methods: {
+    changeBackground() {
+      document.body.className = this.bgColor;
+    },
+    changeFontSize() {
+      document.documentElement.className = this.fontSize;
+    },
+    changeStyle() {
+      // 方法内容...
+    },
+    changeFont() {
+      document.documentElement.style.fontFamily = this.selectedFont;
+    },
     nextPublication() {
       if (this.currentIndex + 3 < this.userInfo.publications.length) {
         this.currentIndex += 3;
@@ -156,11 +274,104 @@ export default {
 </script>
 
 <style lang="less" scoped>
-/* ... 你现有的样式 ... */
+
+
+.arial-style {
+  font-family: 'Arial', sans-serif;
+  /* 其他与Arial字体相关的样式 */
+}
+
+.verdana-style {
+  font-family: 'Verdana', sans-serif;
+  /* 其他与Verdana字体相关的样式 */
+}
+.georgia-style {
+  font-family: 'Georgia', serif;
+}
+.courier-style {
+  font-family: 'Courier New', monospace;
+}
+.comicSansMS-style {
+  font-family: 'Comic Sans MS', sans-serif;
+}
+.timesNewRoman-style {
+  font-family: 'Times New Roman', serif;
+}
+.trebuchetMS-style {
+  font-family: 'Trebuchet MS', sans-serif;
+}
+.tahoma-style {
+  font-family: 'Tahoma', sans-serif;
+}
+.lucidaSans-style {
+  font-family: 'Lucida Sans Unicode', sans-serif;
+}
+.impact-style {
+  font-family: 'Impact', sans-serif;
+}
+.helvetica-style {
+  font-family: 'Helvetica', sans-serif;
+}
+.gillSans-style {
+  font-family: 'Gill Sans', sans-serif;
+}
+.franklinGothic-style {
+  font-family: 'Franklin Gothic', sans-serif;
+}
+.calibri-style {
+  font-family: 'Calibri', sans-serif;
+}
+.cambria-style {
+  font-family: 'Cambria', serif;
+}
+.baskerville-style {
+  font-family: 'Baskerville', serif;
+}
+.avantGarde-style {
+  font-family: 'Avant Garde', sans-serif;
+}
+.arialNarrow-style {
+  font-family: 'Arial Narrow', sans-serif;
+}
+.arialBlack-style {
+  font-family: 'Arial Black', sans-serif;
+}
+.anton-style {
+  font-family: 'Anton', sans-serif;
+}
+.white-bg {
+  background-color: #ffffff;
+}
+.blue-bg {
+  background-color: #464d63;  // 更亮的背景
+
+}
+
+.black-bg {
+  background-color: #000000;
+}
+
+// ...其他颜色样式
+
+.small-font {
+  font-size: 12px;
+}
+
+.medium-font {
+  font-size: 16px;
+}
+
+.large-font {
+  font-size: 20px;
+}
+
+// ...其他字体大小样式
+
+
+
 .limited-description {
   .ell-3;
 
-  // 可能需要一个固定的宽度或最大宽度来确保ellipsis正常工作
   max-width: 80%;  // 或根据你的需要调整
 }
 
@@ -178,6 +389,24 @@ a-icon {
 }
 
 /* 在需要的地方应用这个样式，例如 */
+.red-color h1, .red-color h2 {
+  color: red;
+}
+.blue-color h1, .blue-color h2 {
+  color: blue;
+}
+//... 其他颜色样式
+
+.large-title h1, .large-title h2 {
+  font-size: 150%; // 调整大小
+}
+.xlarge-title h1 {
+  font-size: 200%;
+}
+.xlarge-title h2 {
+  font-size: 175%;
+}
+//... 其他字体大小样式
 
 
 .ell-1 {
@@ -201,7 +430,8 @@ body {
 }
 
 .template {
-  background-color: #464d63;  // 更亮的背景
+  //font-family: "Hack Nerd Font Mono";
+  //background-color: #464d63;  // 更亮的背景
   padding: 30px;
   border-radius: 10px;
   color: #f5f5f5;
@@ -246,10 +476,16 @@ a-row {
   margin-top: 15px;
   font-size: 18px;
 }
+.green-color h1,
+.green-color h2,
+.green-color div,
+.green-color p {
+  color: green;
+}
+//... 其他颜色样式
 
 /* Teaching, Degrees, and Academic Position sections */
 .list {
-
   //background-color: #ffffff;
   color: #000;
   padding: 10px;
@@ -302,6 +538,9 @@ a-row {
 
 .pdf-link:hover {
   background-color: #4a6d8c;
+}
+.arial-style div, .arial-style p, .arial-style h1, .arial-style h2 {
+  font-family: 'Arial', sans-serif;
 }
 
 </style>
