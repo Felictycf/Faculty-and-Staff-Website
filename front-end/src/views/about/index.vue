@@ -16,13 +16,17 @@
       This website is our Research and Development project. In thiswebsite the academic staff can create their own academicprofiles where they can choose the design of their profile fromfour design templates.
     </div>
 
-    <div style="padding-bottom: 20px"></div>
+    <div style="padding-bottom: 60px"></div>
     <div class="text22" style="background-color: #d9d9d9;">
        a small explanation of how the use the website. maybe in
       steps
     </div>
     <div class="header-section" >
     </div>
+
+    <img src="@/assets/img.png"  style="position: relative;left: 200px;bottom: 320px"  width="600" height="300" >
+    <div class="overlay-text">Photo of us</div>
+
 
     <div class="instructions">
       <!-- Insert the step-by-step instructions here, if needed. -->
@@ -75,6 +79,13 @@ export default {
   text-align: center;
 }
 .overlay-text {
+  position: relative;
+  left: 200px;
+  bottom: 600px;
+  z-index: 1;
   color: #050003;
+  font-size: 60px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 </style>

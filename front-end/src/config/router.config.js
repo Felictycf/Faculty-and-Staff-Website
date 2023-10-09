@@ -15,24 +15,24 @@ export const asyncRouterMap = [
     meta: { title: 'menu.home' },
     redirect: '/profile/basic',
     children: [
-      {
-        path: '/form/base-form',
-        name: 'BaseForm',
-        component: () => import('@/views/form/basicForm/index.vue'),
-        meta: { title: 'Editing', keepAlive: true, permission: ['form'] },
-      },
 
       {
         path: '/profile/basic',
         name: 'ProfileBasic',
         component: () => import('@/views/profile/basic'),
-        meta: { title: 'Home', permission: ['profile'] },
+        meta: { title: 'Profile Design View', permission: ['profile'] },
       },
       {
         path: '/profile/advanced',
         name: 'ProfileAdvanced',
         component: () => import('@/views/profile/advanced/Advanced'),
-        meta: { title: 'Template Choose', permission: ['profile'] },
+        meta: { title: ' View Profile', permission: ['profile'] },
+      },
+      {
+        path: '/form/base-form',
+        name: 'BaseForm',
+        component: () => import('@/views/form/basicForm/index.vue'),
+        meta: { title: 'Edit Profile', keepAlive: true, permission: ['form'] },
       },
       {
         path: '/profile/about',

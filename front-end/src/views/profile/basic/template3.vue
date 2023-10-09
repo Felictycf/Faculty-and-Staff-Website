@@ -43,6 +43,7 @@
 
 
 
+
       <div :class="currentBG">
   <div class="template">
     <h2 style="text-align: center; font-size: 30px">Academic Staff webpage</h2>
@@ -77,12 +78,15 @@
         </a-row>
 
         <a-row>
-          <p><a-icon type="book" /> Teaching : </p>
-          <ul>
-            <li v-for="(item, index) in userInfo.teaching" :key="item.time"  >
-              {{ index + 1 }}. {{ item.description }} ({{item.time}})
-            </li>
-          </ul>
+          <p style="font-size: 18px"><a-icon type="book" /> Teaching : </p>
+          <div v-for="category in uniqueCategories" :key="category">
+            <h3>{{ category }}</h3>
+            <ul>
+              <li v-for="(item, index) in filteredItems(category)" :key="index">
+                {{ index + 1 }}. {{ item.description }} ({{ item.time }})
+              </li>
+            </ul>
+          </div>
         </a-row>
       </a-col>
       <a-col :span="8" style="background-color: white; padding: 20px">
@@ -223,6 +227,19 @@ export default {
     }
   },
   computed: {
+    uniqueCategories() {
+      // Using a Set to only get unique category names and then converting it to an array.
+      console.log("category")
+      console.log(this.userInfo)
+      console.log(...new Set(this.userInfo.teaching.map(item => item.university)))
+      return [...new Set(this.userInfo.teaching.map(item => item.university))];
+    },
+
+    filteredItems() {
+      return (category) => {
+        return this.userInfo.teaching.filter(item => item.university === category);
+      }
+    },
     currentPublications() {
       return this.userInfo.publications.slice(this.currentIndex, this.currentIndex + 3);
     },
@@ -274,6 +291,18 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.teaching-columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.teaching-column {
+  flex: 1;
+  min-width: 200px;  // 最小宽度
+  max-width: 45%;    // 最大宽度，避免太宽
+  margin: 10px;      // 四周边距
+}
 
 
 .arial-style {
@@ -542,5 +571,7 @@ a-row {
 .arial-style div, .arial-style p, .arial-style h1, .arial-style h2 {
   font-family: 'Arial', sans-serif;
 }
+// ... 其他字体样式
+
 
 </style>

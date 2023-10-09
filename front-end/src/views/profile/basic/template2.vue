@@ -1,6 +1,20 @@
 <!--功能代码模版选择2-->
 <template>
-  <div class="template">
+  <div class="template"  :class="[currentStyle, currentFont, currentColor]">
+    <div class="style-options">
+      <label>Font Style:</label>
+      <select v-model="currentStyle">
+        <option v-for="font in fontList" :key="font.name" :value="font.className">{{ font.name }}</option>
+      </select>
+      <label>Font Size:</label>
+      <select v-model="currentFont">
+        <option v-for="size in fontSizeList" :key="size.name" :value="size.className">{{ size.name }}</option>
+      </select>
+      <label>Color:</label>
+      <select v-model="currentColor">
+        <option v-for="color in colorList" :key="color.name" :value="color.className">{{ color.name }}</option>
+      </select>
+    </div>
     <a-row :gutter="1">
       <a-col :span="6">
         <img :height="160" :src="userInfo.avatar" />
@@ -18,14 +32,27 @@
           <a-collapse accordion>
             <a-collapse-panel key="1" header="Teaching">
               <div class="teaching-circle">
-                <h3 class="teaching-title">PHD and Master Supervision</h3>
-                <div v-for="(item, index) in userInfo.teaching" :key="item.time" class="teaching-item">
-                  <span class="teaching-description"><a-icon type="read" />      {{ item.description }} <span class="teaching-time">({{ item.time }})</span></span>
+                <!-- Wrap the categories in a flex container -->
+                <div class="teaching-categories-wrapper">
+
+                  <!-- First, iterate over unique categories. -->
+                  <div v-for="category in uniqueCategories" :key="category" class="teaching-category">
+
+                    <!-- Display the category title -->
+                    <h3 class="teaching-category-title">{{ category }}</h3>
+
+                    <!-- Next, for each category, display its items. -->
+                    <div v-for="(item, index) in filteredItems(category)" :key="item.time" class="teaching-item">
+                      <span class="teaching-description"><a-icon type="read" /> {{ item.description }} <span class="teaching-time">({{ item.time }})</span></span>
+                    </div>
+
+                  </div>
+
                 </div>
               </div>
             </a-collapse-panel>
 
-            <a-collapse-panel key="2" header="About">
+            <a-collapse-panel key="2" header="About" >
               <a-timeline mode="alternate">
                 <a-timeline-item>
                   <div>
@@ -92,7 +119,7 @@
                 <a-col :span="4">
                   <img :src="item.img" alt="Publication Image" width="120px" height="100px " class="pub-image" />
                 </a-col>
-                <a-col :span="16">
+                <a-col :class="[currentColor,currentFont]" :span="16">
                   <h3>{{item.title}}</h3>
 <!--                  <b>{{ item.time }}</b>-->
                   <p class="publication-description">{{ item.description }}</p>
@@ -122,7 +149,7 @@
             </a-collapse-panel> -->
 
             <a-collapse-panel key="4" header="Research">
-              <p>{{ userInfo.researchAreas }}</p>
+              <p :class="[currentColor,currentFont]">{{ userInfo.researchAreas }}</p>
               <!-- <a-row v-for="(item, index) in userInfo.aacdimicPosition" :key="item.time">
                 <a-row>
                   <b>{{ index + 1 }}</b>
@@ -163,9 +190,9 @@
       </a-col>
       <a-col :span="8">
         <h2>Recent Highlights</h2>
-        <div class="list">
+        <div class="list" :class="[currentColor,currentFont]">
           <div class="item" v-for="item in userInfo.highlights" :key="item.time">
-            <a-card style="margin-bottom: 10px">
+            <a-card style="margin-bottom: 10px" :class="[currentColor,currentFont]">
               <h3>{{ item.time }}</h3>
               <b>{{ item.description }}</b>
             </a-card>
@@ -193,11 +220,67 @@
 export default {
   data() {
     return {
+      currentStyle: 'arial-style',
+      currentFont: 'medium-font',
+      currentColor: 'default-color',
+      fontList: [
+      { name: 'Arial', className: 'arial-style' },
+      { name: 'Verdana', className: 'verdana-style' },
+      { name: 'Georgia', className: 'georgia-style' },
+      { name: 'Courier New', className: 'courier-style' },
+      { name: 'Comic Sans MS', className: 'comicSansMS-style' },
+      { name: 'Times New Roman', className: 'timesNewRoman-style' },
+      { name: 'Trebuchet MS', className: 'trebuchetMS-style' },
+      { name: 'Tahoma', className: 'tahoma-style' },
+      { name: 'Lucida Sans Unicode', className: 'lucidaSans-style' },
+      { name: 'Impact', className: 'impact-style' },
+      { name: 'Helvetica', className: 'helvetica-style' },
+      { name: 'Gill Sans', className: 'gillSans-style' },
+      { name: 'Franklin Gothic', className: 'franklinGothic-style' },
+      { name: 'Calibri', className: 'calibri-style' },
+      { name: 'Cambria', className: 'cambria-style' },
+      { name: 'Baskerville', className: 'baskerville-style' },
+      { name: 'Avant Garde', className: 'avantGarde-style' },
+      { name: 'Arial Narrow', className: 'arialNarrow-style' },
+      { name: 'Arial Black', className: 'arialBlack-style' },
+      { name: 'Anton', className: 'anton-style' }
+        // ... 其他字体可以加在此处
+      ],
+      fontSizeList: [
+        { name: 'Small', className: 'small-font' },
+        { name: 'Medium', className: 'medium-font' },
+        { name: 'Large', className: 'large-font' },
+        // ... 其他大小可以加在此处
+      ],
+      colorList: [
+        { name: 'Default', className: 'default-color' },
+        { name: 'Green', className: 'green-color' },
+        { name: 'Blue', className: 'blue-color' },
+        { name: 'Red', className: 'red-color' },
+        { name: 'Yellow', className: 'yellow-color' },
+        { name: 'Purple', className: 'purple-color' },
+        { name: 'Orange', className: 'orange-color' },
+        { name: 'Black', className: 'black-color' },
+        { name: 'Gray', className: 'gray-color' },
+      ],
       text: 'sdfsdfsd',
       currentIndex: 0,
     }
   },
   computed: {
+    uniqueCategories() {
+      // Using a Set to only get unique category names and then converting it to an array.
+      console.log("category")
+      console.log(this.userInfo)
+      console.log(...new Set(this.userInfo.teaching.map(item => item.university)))
+      return [...new Set(this.userInfo.teaching.map(item => item.university))];
+    },
+
+    filteredItems() {
+      return (category) => {
+        return this.userInfo.teaching.filter(item => item.university === category);
+      }
+    },
     currentPublications() {
       return this.userInfo.publications.slice(this.currentIndex, this.currentIndex + 3);
     },
@@ -235,6 +318,33 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
+.teaching-categories-wrapper {
+  display: flex;  // Use Flexbox to create columns
+  justify-content: space-between;  // Distribute the space between columns
+  gap: 20px;  // Space between categories if necessary
+}
+
+.teaching-category-title {
+  font-size: 22px;  // Adjust based on your desired size
+  text-align: left;  // Align to the left
+  background-color: #f7f8fa;  // A light background for contrast
+  padding: 5px 10px;  // Some padding for aesthetics
+  border-top: 1px solid #e3e5e5;  // A subtle top border
+  border-bottom: 1px solid #e3e5e5;  // A subtle bottom border
+}
+
+.teaching-category {
+  display: flex;  // Use Flexbox
+  flex-direction: column;  // Arrange children vertically
+  align-items: flex-start;  // Align children to the left
+  gap: 10px;  // Space between category title and items
+  width: 45%;  // Set a width to make sure categories take up only half the space
+}
+
+.teaching-item {
+  padding-left: 20px;  // Indent items for a better visual hierarchy
+}
 .link-container {
   display: flex;
   flex-direction: column;
@@ -332,7 +442,7 @@ body {
   border-radius: 12px;
   border: 8px solid #6bc3df;
   width: 90%;
-  max-width: 620px;
+  max-width: 1000px;
   padding: 25px 35px;
   margin: 25px auto;
   display: flex;
@@ -411,4 +521,128 @@ h2 {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
+.style-options {
+  margin-top: 20px;
+  select {
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+}
+
+.arial-style {
+  font-family: 'Arial', sans-serif;
+}
+
+.small-font {
+  font-size: 12px;
+}
+
+.medium-font {
+  font-size: 16px;
+}
+
+.large-font {
+  font-size: 20px;
+}
+
+.default-color {
+  color: #555;
+}
+
+.green-color {
+  color: green;
+}
+
+.blue-color {
+  color: blue;
+}
+
+.red-color {
+  color: red;
+}
+
+.yellow-color {
+  color: yellow;
+}
+
+.purple-color {
+  color: purple;
+}
+
+.orange-color {
+  color: orange;
+}
+
+.black-color {
+  color: black;
+}
+
+.gray-color {
+  color: gray;
+}
+.arial-style {
+  font-family: 'Arial', sans-serif;
+  /* 其他与Arial字体相关的样式 */
+}
+
+.verdana-style {
+  font-family: 'Verdana', sans-serif;
+  /* 其他与Verdana字体相关的样式 */
+}
+.georgia-style {
+  font-family: 'Georgia', serif;
+}
+.courier-style {
+  font-family: 'Courier New', monospace;
+}
+.comicSansMS-style {
+  font-family: 'Comic Sans MS', sans-serif;
+}
+.timesNewRoman-style {
+  font-family: 'Times New Roman', serif;
+}
+.trebuchetMS-style {
+  font-family: 'Trebuchet MS', sans-serif;
+}
+.tahoma-style {
+  font-family: 'Tahoma', sans-serif;
+}
+.lucidaSans-style {
+  font-family: 'Lucida Sans Unicode', sans-serif;
+}
+.impact-style {
+  font-family: 'Impact', sans-serif;
+}
+.helvetica-style {
+  font-family: 'Helvetica', sans-serif;
+}
+.gillSans-style {
+  font-family: 'Gill Sans', sans-serif;
+}
+.franklinGothic-style {
+  font-family: 'Franklin Gothic', sans-serif;
+}
+.calibri-style {
+  font-family: 'Calibri', sans-serif;
+}
+.cambria-style {
+  font-family: 'Cambria', serif;
+}
+.baskerville-style {
+  font-family: 'Baskerville', serif;
+}
+.avantGarde-style {
+  font-family: 'Avant Garde', sans-serif;
+}
+.arialNarrow-style {
+  font-family: 'Arial Narrow', sans-serif;
+}
+.arialBlack-style {
+  font-family: 'Arial Black', sans-serif;
+}
+.anton-style {
+  font-family: 'Anton', sans-serif;
+}
+
+
 </style>

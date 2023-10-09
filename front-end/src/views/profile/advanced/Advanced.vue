@@ -1,23 +1,42 @@
 <!--第三个模板选择页面-->
 <template>
   <div class="template-choose">
-    <h2 style="text-align: center">choose template</h2>
+    <h2 style="text-align: center">choose Design</h2>
     <div class="row">
-      <div class="col" :class="{ active: template === 1 }" @click="setTemplate(1)">
-        <img src="@/assets/template1.jpg" />
+      <div class="col" :class="{ active: template === 1 }">
+        <div class="header-container">
+          <h3>Design 1</h3>
+          <a href="#" @click.prevent="setTemplate(1)">More Detail</a>
+        </div>
+
+        <img src="@/assets/template1.jpg" @click="setTemplate(1)" />
       </div>
-      <div class="col" :class="{ active: template === 2 }" @click="setTemplate(2)">
-        <img src="@/assets/template2.jpg" />
+      <div class="col" :class="{ active: template === 2 }">
+        <div class="header-container">
+          <h3>Design 2</h3>
+          <a href="#" @click.prevent="setTemplate(2)">More Detail</a>
+        </div>
+        <img src="@/assets/template2.jpg" @click="setTemplate(2)" />
       </div>
-      <div class="col" :class="{ active: template === 3 }" @click="setTemplate(3)">
-        <img src="@/assets/template3.jpg" />
+      <div class="col" :class="{ active: template === 3 }">
+        <div class="header-container">
+        <h3>Design 3</h3>
+        <a href="#" @click.prevent="setTemplate(3)">More Detail</a>
+        </div>
+        <img src="@/assets/template3.jpg" @click="setTemplate(3)" />
       </div>
-      <div class="col" :class="{ active: template === 4 }" @click="setTemplate(4)">
-        <img src="@/assets/template4.jpg" />
+      <div class="col" :class="{ active: template === 4 }">
+
+        <div class="header-container">
+        <h3>Design 4</h3>
+        <a href="#" @click.prevent="setTemplate(4)">More Detail</a>
+        </div>
+        <img src="@/assets/template4.jpg" @click="setTemplate(4)" />
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
 import { login, getInfo, logout } from '@/api/login'
@@ -49,6 +68,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.header-container {
+  display: flex;
+  align-items: center;  /* Vertically centers the text of both elements if they have different font sizes */
+  justify-content: space-between; /* Adds space between the elements, ensuring they spread out */
+}
+
 .template-choose {
   .row {
     width: 100%;

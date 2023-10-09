@@ -24,7 +24,7 @@
         <!-- <img src="@/assets/logo.svg" /> -->
         <img src="@/assets/logo.png" />
         <!-- <h1>{{ title }}</h1> -->
-        <h1>User system</h1>
+<!--        <h1>User system</h1>-->
       </div>
     </template>
     <!-- 1.0.0+ 版本 pro-layout 提供 API,

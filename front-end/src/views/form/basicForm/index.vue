@@ -198,10 +198,11 @@
         :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"
         :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"
       >
-        <a-input
+        <a-textarea
           v-decorator="['avibilitiy', { rules: [{ required: true }] }]"
           name="avibilitiy"
           placeholder="Please enter Avibilitiy"
+          :auto-size="{ minRows: 3, maxRows: 12 }"
         />
       </a-form-item>
       <!-- <a-form-item
@@ -286,10 +287,11 @@
         :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"
         :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"
       >
-        <a-input
+        <a-textarea
           v-decorator="['researchAreas', { rules: [{ required: true }] }]"
           name="researchAreas"
           placeholder="Please enter Fields of research"
+          :auto-size="{ minRows: 3, maxRows: 12 }"
         />
       </a-form-item>
 
@@ -312,11 +314,11 @@
       <a-form-item
         label="publications"
         :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"
-        :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"
+        :wrapperCol="{ lg: { span: 16 }, sm: { span: 30 } }"
       >
         <a-table :columns="columns2" :dataSource="data2" :pagination="false">
           <template
-            v-for="(col2, indx) in ['time', 'title', 'img', 'pdf', 'description', '']"
+            v-for="(col2, indx) in ['time', 'title', 'img', 'pdf', 'url','description','category', '']"
             :slot="col2"
             slot-scope="text2, record2"
           >
@@ -349,9 +351,13 @@
               <a v-if="text2" :href="text2" target="_blank">View PDF</a>
             </template>
 
+            <template v-if="col2 === 'url'">
+
+              <a v-if="text2" :href="text2" target="_blank">Link</a>
+            </template>
             <!-- Default textarea for other columns -->
             <a-textarea
-              v-if="col2 !== 'img' && col2 !== 'pdf' && record2?.editable"
+              v-if="col2 !== 'img' && col2 !== 'pdf'  && record2?.editable"
               :key="col2"
               style="margin: -5px 0"
               :value="text2"
@@ -449,7 +455,7 @@
         :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"
       >
         <a-table :columns="columns3" :dataSource="data3" :pagination="false">
-          <template v-for="(col, i) in ['time', 'description', '']" :slot="col" slot-scope="text, record">
+          <template v-for="(col, i) in ['time', 'description', 'category','']" :slot="col" slot-scope="text, record">
             <a-textarea
               :key="col"
               v-if="record.editable"
@@ -549,7 +555,7 @@
         :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"
       >
         <a-table :columns="columns5" :dataSource="data5" :pagination="false">
-          <template v-for="(col, i) in ['time', 'description', '']" :slot="col" slot-scope="text, record">
+          <template v-for="(col, i) in ['time', 'description', 'university','']" :slot="col" slot-scope="text, record">
             <a-textarea
               :key="col"
               v-if="record.editable"
@@ -681,11 +687,25 @@ export default {
         },
 
         {
+          title: 'url',
+          dataIndex: 'url',
+          key: 'url',
+          width: '15%',
+          scopedSlots: { customRender: 'url' },
+        },
+        {
           title: 'description',
           dataIndex: 'description',
           key: 'description',
-          width: '30%',
+          width: '20%',
           scopedSlots: { customRender: 'description' },
+        },
+        {
+          title: 'category',
+          dataIndex: 'category',
+          key: 'category',
+          width: '20%',
+          scopedSlots: { customRender: 'category' },
         },
         {
           title: 'action',
@@ -712,6 +732,14 @@ export default {
           scopedSlots: { customRender: 'description' },
         },
         {
+          title: 'category',
+          dataIndex: 'category',
+          key: 'category',
+          width: '20%',
+          scopedSlots: { customRender: 'category' },
+        },
+        {
+
           title: 'action',
           key: 'action',
           scopedSlots: { customRender: 'operation' },
@@ -756,6 +784,14 @@ export default {
           key: 'description',
           width: '50%',
           scopedSlots: { customRender: 'description' },
+        },
+
+        {
+          title: 'university',
+          dataIndex: 'university',
+          key: 'university',
+          width: '50%',
+          scopedSlots: { customRender: 'university' },
         },
         {
           title: 'action',

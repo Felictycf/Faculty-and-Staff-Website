@@ -1,5 +1,20 @@
 <template>
-  <div class="template">
+  <div class="template" :class="[currentStyle, currentFont, currentColor]">>
+    <!-- 接下来是自定义样式的选项 -->
+    <div class="style-options">
+      <label>Font Style:</label>
+      <select v-model="currentStyle">
+        <option v-for="font in fontList" :key="font.name" :value="font.className">{{ font.name }}</option>
+      </select>
+      <label>Font Size:</label>
+      <select v-model="currentFont">
+        <option v-for="size in fontSizeList" :key="size.name" :value="size.className">{{ size.name }}</option>
+      </select>
+      <label>Color:</label>
+      <select v-model="currentColor">
+        <option v-for="color in colorList" :key="color.name" :value="color.className">{{ color.name }}</option>
+      </select>
+    </div>
     <a-row :gutter="2">
       <a-col :span="12">
         <h1>
@@ -61,11 +76,14 @@
 
         <a-row>
           <h2><a-icon type="read" /> Teaching</h2>
-          <ul>
-            <li v-for="(item, index) in userInfo.teaching" :key="item.time">
-              {{ index + 1 }}. {{ item.description }}
-            </li>
-          </ul>
+          <div v-for="category in uniqueCategories" :key="category">
+            <h3>{{ category }}</h3>
+            <ul>
+              <li v-for="(item, index) in filteredItems(category)" :key="index">
+                {{ index + 1 }}. {{ item.description }} ({{ item.time }})
+              </li>
+            </ul>
+          </div>
         </a-row>
       </a-col>
 
@@ -111,10 +129,66 @@
 export default {
   data(){
     return{
+      currentStyle: 'arial-style',
+      currentFont: 'medium-font',
+      currentColor: 'default-color',
+      fontList: [
+        { name: 'Arial', className: 'arial-style' },
+        { name: 'Verdana', className: 'verdana-style' },
+        { name: 'Georgia', className: 'georgia-style' },
+        { name: 'Courier New', className: 'courier-style' },
+        { name: 'Comic Sans MS', className: 'comicSansMS-style' },
+        { name: 'Times New Roman', className: 'timesNewRoman-style' },
+        { name: 'Trebuchet MS', className: 'trebuchetMS-style' },
+        { name: 'Tahoma', className: 'tahoma-style' },
+        { name: 'Lucida Sans Unicode', className: 'lucidaSans-style' },
+        { name: 'Impact', className: 'impact-style' },
+        { name: 'Helvetica', className: 'helvetica-style' },
+        { name: 'Gill Sans', className: 'gillSans-style' },
+        { name: 'Franklin Gothic', className: 'franklinGothic-style' },
+        { name: 'Calibri', className: 'calibri-style' },
+        { name: 'Cambria', className: 'cambria-style' },
+        { name: 'Baskerville', className: 'baskerville-style' },
+        { name: 'Avant Garde', className: 'avantGarde-style' },
+        { name: 'Arial Narrow', className: 'arialNarrow-style' },
+        { name: 'Arial Black', className: 'arialBlack-style' },
+        { name: 'Anton', className: 'anton-style' }
+      ],
+      fontSizeList: [
+        { name: 'Small', className: 'small-font' },
+        { name: 'Medium', className: 'medium-font' },
+        { name: 'Large', className: 'large-font' },
+        //... 其他大小
+      ],
+      colorList: [
+        { name: 'Default', className: 'default-color' },
+        { name: 'Green', className: 'green-color' },
+        { name: 'Blue', className: 'blue-color' },
+        { name: 'Red', className: 'red-color' },
+        { name: 'Yellow', className: 'yellow-color' },
+        { name: 'Purple', className: 'purple-color' },
+        { name: 'Orange', className: 'orange-color' },
+        { name: 'Black', className: 'black-color' },
+        { name: 'Gray', className: 'gray-color' },
+      ],
+
       currentIndex: 0,
     }
   },
   computed: {
+    uniqueCategories() {
+      // Using a Set to only get unique category names and then converting it to an array.
+      console.log("category")
+      console.log(this.userInfo)
+      console.log(...new Set(this.userInfo.teaching.map(item => item.university)))
+      return [...new Set(this.userInfo.teaching.map(item => item.university))];
+    },
+
+    filteredItems() {
+      return (category) => {
+        return this.userInfo.teaching.filter(item => item.university === category);
+      }
+    },
     researchLeft() {
       const splits = this.userInfo.researchAreas.split('and');
       return splits[0] ? splits[0].trim() : '';
@@ -264,6 +338,70 @@ a-icon {
   //max-height: 150px; // 根据需要可以更改这个值
 
 }
+.arial-style {
+  font-family: 'Arial', sans-serif;
+  /* 其他与Arial字体相关的样式 */
+}
+
+.verdana-style {
+  font-family: 'Verdana', sans-serif;
+  /* 其他与Verdana字体相关的样式 */
+}
+.georgia-style {
+  font-family: 'Georgia', serif;
+}
+.courier-style {
+  font-family: 'Courier New', monospace;
+}
+.comicSansMS-style {
+  font-family: 'Comic Sans MS', sans-serif;
+}
+.timesNewRoman-style {
+  font-family: 'Times New Roman', serif;
+}
+.trebuchetMS-style {
+  font-family: 'Trebuchet MS', sans-serif;
+}
+.tahoma-style {
+  font-family: 'Tahoma', sans-serif;
+}
+.lucidaSans-style {
+  font-family: 'Lucida Sans Unicode', sans-serif;
+}
+.impact-style {
+  font-family: 'Impact', sans-serif;
+}
+.helvetica-style {
+  font-family: 'Helvetica', sans-serif;
+}
+.gillSans-style {
+  font-family: 'Gill Sans', sans-serif;
+}
+.franklinGothic-style {
+  font-family: 'Franklin Gothic', sans-serif;
+}
+.calibri-style {
+  font-family: 'Calibri', sans-serif;
+}
+.cambria-style {
+  font-family: 'Cambria', serif;
+}
+.baskerville-style {
+  font-family: 'Baskerville', serif;
+}
+.avantGarde-style {
+  font-family: 'Avant Garde', sans-serif;
+}
+.arialNarrow-style {
+  font-family: 'Arial Narrow', sans-serif;
+}
+.arialBlack-style {
+  font-family: 'Arial Black', sans-serif;
+}
+.anton-style {
+  font-family: 'Anton', sans-serif;
+}
+
 .availability-box ol {
   list-style-type: none;  /* 移除默认的数字 */
 
@@ -284,5 +422,56 @@ a-icon {
     }
   }
 }
+// 新增的自定义样式部分
+.arial-style {
+  font-family: 'Arial', sans-serif;
+}
+.small-font {
+  font-size: 12px;
+}
+.medium-font {
+  font-size: 16px;
+}
+.large-font {
+  font-size: 20px;
+}
+.default-color {
+  color: #555;
+}
+.green-color {
+  color: green;
+}
+.blue-color {
+  color: blue;
+}
+.red-color {
+  color: red;
+}
+.yellow-color {
+  color: yellow;
+}
+.purple-color {
+  color: purple;
+}
+.orange-color {
+  color: orange;
+}
+.black-color {
+  color: black;
+}
+.gray-color {
+  color: gray;
+}
 
+.green-color {
+  color: green;
+}
+//... 其他样式
+.style-options {
+  margin-top: 20px;
+  select {
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+}
 </style>
