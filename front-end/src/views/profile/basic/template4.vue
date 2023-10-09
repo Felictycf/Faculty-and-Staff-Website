@@ -1,5 +1,5 @@
 <template>
-  <div class="template" :class="[currentStyle, currentFont, currentColor]">>
+  <div class="template" :class="[currentStyle, currentFont, currentColor]">
     <!-- 接下来是自定义样式的选项 -->
     <div class="style-options">
       <label>Font Style:</label>
@@ -84,6 +84,24 @@
               </li>
             </ul>
           </div>
+          <h2 style=" color: #000;"><a-icon type="graduation-cap" /> Degrees</h2>
+            <a-row>
+              <div v-for="category in uniqueCategoriesDegree" :key="category">
+                <h3>{{ category }}</h3>
+                <ul>
+                  <li v-for="(item, index) in filteredItemsDegree(category)" :key="index">
+                    {{ index + 1 }}. {{ item.description }} ({{ item.time }})
+                  </li>
+                </ul>
+              </div>
+          </a-row>
+<br/>
+          <div style="display: flex; align-items: center; justify-content: flex-start; font-size: 18px;">
+            <!-- 使用Ant Design的信封图标作为对应项的标识 -->
+            <a-icon type="mail" style="margin-right: 10px; font-size: 20px; color: #1890ff;"></a-icon>
+            <p style="margin: 0;">Correspondence: {{userInfo.contribution}}</p>
+          </div>
+
         </a-row>
       </a-col>
 
@@ -176,11 +194,18 @@ export default {
     }
   },
   computed: {
+    uniqueCategoriesDegree() {
+      // Using a Set to only get unique category names and then converting it to an array.
+      return [...new Set(this.userInfo.degrees.map(item => item.category))];
+    },
+
+    filteredItemsDegree() {
+      return (category) => {
+        return this.userInfo.degrees.filter(item => item.category=== category);
+      }
+    },
     uniqueCategories() {
       // Using a Set to only get unique category names and then converting it to an array.
-      console.log("category")
-      console.log(this.userInfo)
-      console.log(...new Set(this.userInfo.teaching.map(item => item.university)))
       return [...new Set(this.userInfo.teaching.map(item => item.university))];
     },
 

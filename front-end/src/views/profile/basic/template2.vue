@@ -53,55 +53,70 @@
             </a-collapse-panel>
 
             <a-collapse-panel key="2" header="About" >
-              <a-timeline mode="alternate">
-                <a-timeline-item>
-                  <div>
-                    <b>BIO</b>
-                    <div>{{ userInfo.bio }}</div>
-                  </div>
-                </a-timeline-item>
+    <a-row :gutter="{ xs: 8, sm: 16, md: 24, lg: 32 }">
 
-                <a-timeline-item>
-                  <div>
-                    <b>ACADEMIC POSITIONS</b>
-                    <a-row v-for="(item, index) in userInfo.aacdimicPosition" :key="item.time">
-                      <a-row>
-                        <b>{{ index + 1 }}</b>
-                        {{ item.description }}
-                        {{ item.time }}
-                      </a-row>
-                    </a-row>
-                  </div>
-                </a-timeline-item>
+      <!-- 第一列：时间轴1 -->
+      <a-col :span="12">
+        <a-timeline>
+          <a-timeline-item >
+            <div>
+              <b>BIO</b>
+              <div>{{ userInfo.bio }}</div>
+            </div>
+          </a-timeline-item>
 
-                <a-timeline-item>
-                  <div>
-                    <b>DEGREES</b>
-                    <a-row v-for="(item, index) in userInfo.degrees" :key="item.time">
-                      <a-row>
-                        <b>{{ index + 1 }}</b>
-                        {{ item.description }}
-                        {{ item.time }}
-                      </a-row>
-                    </a-row>
-                  </div>
-                </a-timeline-item>
+          <a-timeline-item>
+            <div>
+              <b>ACADEMIC POSITIONS</b>
+              <a-row v-for="(item, index) in userInfo.aacdimicPosition" :key="item.time">
+                <a-row>
+                  <b>{{ index + 1 }}</b>
+                  {{ item.description }}
+                  {{ item.time }}
+                </a-row>
+              </a-row>
+            </div>
+          </a-timeline-item>
 
-                <a-timeline-item>
-                  <div>
-                    <b>AVAILABILITY</b>
-                    <div>{{ userInfo.avibilitiy }}</div>
-                  </div>
-                </a-timeline-item>
+          <a-timeline-item>
+            <div>
+              <p > Degrees</p>
+<!--              <a-icon type="graduation-cap" />-->
+              <a-row>
+                <div v-for="category in uniqueCategoriesDegree" :key="category">
+                  <h3>{{ category }}</h3>
+                  <ul>
+                    <li v-for="(item, index) in filteredItemsDegree(category)" :key="index">
+                      {{ index + 1 }}. {{ item.description }} ({{ item.time }})
+                    </li>
+                  </ul>
+                </div>
+              </a-row>
+            </div>
+          </a-timeline-item>
+        </a-timeline>
+      </a-col>
 
-                <a-timeline-item>
-                  <div>
-                    <b>FIELDS OF RESEARCH</b>
-                    <div>{{ userInfo.researchAreas }}</div>
-                  </div>
-                </a-timeline-item>
-              </a-timeline>
-            </a-collapse-panel>
+      <!-- 第二列：时间轴2 -->
+      <a-col :span="12"  >
+        <a-timeline mode="right">
+          <a-timeline-item>
+            <div>
+              <b>AVAILABILITY</b>
+              <div>{{ userInfo.avibilitiy }}</div>
+            </div>
+          </a-timeline-item>
+
+          <a-timeline-item>
+            <div>
+              <b>FIELDS OF RESEARCH</b>
+              <div>{{ userInfo.researchAreas }}</div>
+            </div>
+          </a-timeline-item>
+        </a-timeline>
+      </a-col>
+    </a-row>
+  </a-collapse-panel>
 
             <!-- <a-collapse-panel key="2" header="Degrees" :disabled="false">
               <a-row v-for="(item, index) in userInfo.degrees" :key="item.time">
@@ -268,6 +283,17 @@ export default {
     }
   },
   computed: {
+    uniqueCategoriesDegree() {
+      // Using a Set to only get unique category names and then converting it to an array.
+      return [...new Set(this.userInfo.degrees.map(item => item.category))];
+    },
+
+    filteredItemsDegree() {
+      return (category) => {
+        return this.userInfo.degrees.filter(item => item.category=== category);
+      }
+    },
+
     uniqueCategories() {
       // Using a Set to only get unique category names and then converting it to an array.
       console.log("category")

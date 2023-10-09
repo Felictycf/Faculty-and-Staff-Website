@@ -87,17 +87,22 @@
               </li>
             </ul>
           </div>
+          <p style="font-size: 18px"> Correspondence: {{userInfo.contribution}} </p>
         </a-row>
       </a-col>
+
       <a-col :span="8" style="background-color: white; padding: 20px">
         <div class="list">
           <h2 style=" color: #000;"><a-icon type="graduation-cap" /> Degrees</h2>
-          <a-row v-for="(item, index) in userInfo.degrees" :key="item.time">
-            <a-row>
-              <b>{{ index + 1 }}</b>
-              {{ item.description }}
-              {{ item.time }}
-            </a-row>
+          <a-row>
+            <div v-for="category in uniqueCategoriesDegree" :key="category">
+              <h3>{{ category }}</h3>
+              <ul>
+                <li v-for="(item, index) in filteredItemsDegree(category)" :key="index">
+                  {{ index + 1 }}. {{ item.description }} ({{ item.time }})
+                </li>
+              </ul>
+            </div>
           </a-row>
           <h2 style="margin-top: 30px ;color: #000;"><a-icon type="idcard" /> Academic Position</h2>
           <a-row v-for="(item, index) in userInfo.aacdimicPosition" :key="item.time">
@@ -227,6 +232,17 @@ export default {
     }
   },
   computed: {
+    uniqueCategoriesDegree() {
+      // Using a Set to only get unique category names and then converting it to an array.
+      return [...new Set(this.userInfo.degrees.map(item => item.category))];
+    },
+
+    filteredItemsDegree() {
+      return (category) => {
+        return this.userInfo.degrees.filter(item => item.category=== category);
+      }
+    },
+
     uniqueCategories() {
       // Using a Set to only get unique category names and then converting it to an array.
       console.log("category")

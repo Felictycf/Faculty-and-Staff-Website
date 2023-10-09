@@ -59,84 +59,113 @@
             </div>
           </div>
         </a-tab-pane>
+
         <a-tab-pane key="2" tab="About" force-render>
-          <a-timeline mode="alternate">
-            <a-timeline-item>
-              <div>
-                <b>BIO</b>
-                <div>{{ userInfo.bio }}</div>
-              </div>
-            </a-timeline-item>
+    <a-row :gutter="{ xs: 8, sm: 16, md: 24, lg: 32 }">
 
-            <a-timeline-item>
-              <div>
-                <b>ACADEMIC POSITIONS</b>
-                <a-row v-for="(item, index) in userInfo.aacdimicPosition" :key="item.time">
-                  <a-row>
-                    <b>{{ index + 1 }}</b>
-                    {{ item.description }}
-                    {{ item.time }}
-                  </a-row>
+      <!-- 第一列：时间轴1 -->
+      <a-col :span="12">
+        <a-timeline mode="left">
+          <a-timeline-item >
+            <div>
+              <b>BIO</b>
+              <div>{{ userInfo.bio }}</div>
+            </div>
+          </a-timeline-item>
+
+          <a-timeline-item>
+            <div>
+              <b>ACADEMIC POSITIONS</b>
+              <a-row v-for="(item, index) in userInfo.aacdimicPosition" :key="item.time">
+                <a-row>
+                  <b>{{ index + 1 }}</b>
+                  {{ item.description }}
+                  {{ item.time }}
                 </a-row>
-              </div>
-            </a-timeline-item>
+              </a-row>
+            </div>
+          </a-timeline-item>
 
-            <a-timeline-item>
-              <div>
-                <b>DEGREES</b>
-                <a-row v-for="(item, index) in userInfo.degrees" :key="item.time">
-                  <a-row>
-                    <b>{{ index + 1 }}</b>
-                    {{ item.description }}
-                    {{ item.time }}
-                  </a-row>
-                </a-row>
-              </div>
-            </a-timeline-item>
-
-            <a-timeline-item>
-              <div>
-                <b>AVAILABILITY</b>
-                <div>{{ userInfo.avibilitiy }}</div>
-              </div>
-            </a-timeline-item>
-
-            <a-timeline-item>
-              <div>
-                <b>FIELDS OF RESEARCH</b>
-                <div>{{ userInfo.researchAreas }}</div>
-              </div>
-            </a-timeline-item>
-          </a-timeline>
-        </a-tab-pane>
-        <a-tab-pane key="3" tab="Publication">
-          <a-row :gutter="{ xs: 8, sm: 16, md: 24, lg: 32 }"  > <!-- Gutter to add spacing between grid columns -->
-            <a-col v-for="(item, index) in visiblePublications" :key="item.time" span="8">
-              <div class="publication-item">
-                <img :src="item.img" alt="" class="publication-img" />
-                <div class="publication-data">
-                  <h1>{{ item.title }}</h1>
-                  <div class="time">time : {{ item.time }}</div>
-                  <div class="description">{{ item.description }}</div>
-                  <a class="pdf-link" :href="item.pdf" :download="item.pdf">Read the full article</a>
+          <a-timeline-item>
+            <div>
+              <p > Degrees</p>
+              <!--              <a-icon type="graduation-cap" />-->
+              <a-row>
+                <div v-for="category in uniqueCategoriesDegree" :key="category">
+                  <h3>{{ category }}</h3>
+                  <ul>
+                    <li v-for="(item, index) in filteredItemsDegree(category)" :key="index">
+                      {{ index + 1 }}. {{ item.description }} ({{ item.time }})
+                    </li>
+                  </ul>
                 </div>
-              </div>
-            </a-col>
-          </a-row>
-          <div class="button-container">
-            <a-button @click="prevPublication">
-              <a-icon type="left" />
-            </a-button>
-            <a-button @click="nextPublication">
-              <a-icon type="right" />
-            </a-button>
+              </a-row>
+            </div>
+          </a-timeline-item>
+        </a-timeline>
+      </a-col>
+
+      <!-- 第二列：时间轴2 -->
+      <a-col :span="12"  >
+        <a-timeline mode="right">
+          <a-timeline-item>
+            <div>
+              <b>AVAILABILITY</b>
+              <div>{{ userInfo.avibilitiy }}</div>
+            </div>
+          </a-timeline-item>
+
+          <a-timeline-item>
+            <div>
+              <b>FIELDS OF RESEARCH</b>
+              <div>{{ userInfo.researchAreas }}</div>
+            </div>
+          </a-timeline-item>
+        </a-timeline>
+      </a-col>
+    </a-row>
+  </a-tab-pane>
+
+
+        <a-tab-pane key="3" tab="Publication">
+
+          <!-- Iterate over unique publication categories -->
+          <div v-for="category in uniqueCategoriesPublication" :key="category" class="publication-category">
+
+            <!-- Display the category title -->
+            <h3 class="publication-category-title">{{ category }}</h3>
+
+            <a-row :gutter="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+
+              <!-- For each category, display its items (publications). -->
+              <a-col v-for="(item, index) in filteredItemsDegreePublication(category)" :key="item.time" span="8">
+                <div class="publication-item">
+                  <img :src="item.img" alt="" class="publication-img" />
+                  <div class="publication-data">
+                    <h1>{{ item.title }}</h1>
+                    <div class="time">time : {{ item.time }}</div>
+                    <div class="description">{{ item.description }}</div>
+                    <a class="pdf-link" :href="item.pdf" :download="item.pdf">Read the full article</a>
+                  </div>
+                </div>
+              </a-col>
+
+            </a-row>
+
+            <!-- Navigation buttons for the publications -->
+            <div class="button-container">
+              <a-button @click="prevPublication">
+                <a-icon type="left" />
+              </a-button>
+              <a-button @click="nextPublication">
+                <a-icon type="right" />
+              </a-button>
+            </div>
+
           </div>
 
-
-
-          <!--          <a-button @click="prevPublication" class="carousel-btn prev-btn">⬅️</a-button>-->
-<!--          <a-button @click="nextPublication" class="carousel-btn next-btn">➡️</a-button>-->
         </a-tab-pane>
+
 
 
         <a-tab-pane key="4" tab="Highlights">
@@ -214,6 +243,26 @@ export default {
     }
   },
   computed: {
+    uniqueCategoriesPublication() {
+      // Using a Set to only get unique category names and then converting it to an array.
+      return [...new Set(this.userInfo.publications.map(item => item.category))];
+    },
+    filteredItemsDegreePublication() {
+      return (category) => {
+        return this.userInfo.publications.filter(item => item.category=== category);
+      }
+    },
+    uniqueCategoriesDegree() {
+      // Using a Set to only get unique category names and then converting it to an array.
+      return [...new Set(this.userInfo.degrees.map(item => item.category))];
+    },
+
+    filteredItemsDegree() {
+      return (category) => {
+        return this.userInfo.degrees.filter(item => item.category=== category);
+      }
+    },
+
     uniqueCategories() {
       // Using a Set to only get unique category names and then converting it to an array.
       console.log("category")
@@ -410,10 +459,7 @@ export default {
 .next-btn {
   right: 0;
 }
-
-
-
-                     /* ... your existing styles ... */
+/* ... your existing styles ... */
                      .publication-item {
                        display: flex;
                        flex-direction: column;
@@ -423,6 +469,7 @@ export default {
                        padding: 10px; // Inner spacing
                        margin: 10px 0; // Space between cards
                        box-shadow: 0 2px 5px rgba(0,0,0,0.1); // A subtle shadow for the card
+                       height: 600px;
 
                        .publication-img {
                          height: 200px;
@@ -438,7 +485,7 @@ export default {
                      display: flex;
                      flex-direction: column; // Ensures vertical layout of content
                      justify-content: space-between; // Distributes the space evenly between the contents
-                     height: 200px; // Adjust this value based on your needs
+                     height: 400px; // Adjust this value based on your needs
 
                      .time {
                        font-weight: bold; // Makes the title stand out
