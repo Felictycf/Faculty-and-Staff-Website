@@ -1,5 +1,6 @@
 <template>
   <div class="centered-container">
+    <a-button type="primary" @click="navigateToLogin" style="margin-bottom: 20px;">Login</a-button> <h1 style="text-align: center;font-size: 30px">List of Academic Staff Profiles</h1>
     <a-row :gutter="16">
       <a-col :span="5" style="padding: 20px" v-for="user in userList" :key="user.id">
         <a-card :cover="coverImage(user.avatar)" @click="navigateToRecover(user.id)">
@@ -37,6 +38,9 @@ export default {
     this.getUserList();
   },
   methods: {
+    navigateToLogin() {
+      this.$router.push({ name: 'login' });
+    },
     navigateToRecover(userId) {
       this.$router.push({ path: `/user/recover/${userId}` });
     },
@@ -63,6 +67,8 @@ export default {
 .centered-container {
   padding: 30px;
 }
-
+a-button {
+  margin-bottom: 20px;
+}
 /* Add any additional styling if needed */
 </style>

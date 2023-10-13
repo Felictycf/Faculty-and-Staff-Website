@@ -1,5 +1,7 @@
 <template>
   <div class="template" :class="[currentStyle, currentFont, currentColor]">
+    <h1>Desgin 4</h1>
+
     <!-- 接下来是自定义样式的选项 -->
     <div class="style-options">
       <label>Font Style:</label>

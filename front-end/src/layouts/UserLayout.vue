@@ -10,7 +10,7 @@
             <a href="/">
               <!-- <img src="~@/assets/logo.svg" class="logo" alt="logo"> -->
               <img src="~@/assets/logo.png" class="logo" alt="logo" />
-              <span class="title">User system</span>
+<!--              <span class="title">User system</span>-->
             </a>
           </div>
           <!-- <div class="desc">

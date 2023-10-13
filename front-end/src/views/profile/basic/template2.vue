@@ -1,6 +1,7 @@
 <!--功能代码模版选择2-->
 <template>
   <div class="template"  :class="[currentStyle, currentFont, currentColor]">
+    <h1>Desgin 2</h1>
     <div class="style-options">
       <label>Font Style:</label>
       <select v-model="currentStyle">
@@ -207,7 +208,7 @@
         <h2>Recent Highlights</h2>
         <div class="list" :class="[currentColor,currentFont]">
           <div class="item" v-for="item in userInfo.highlights" :key="item.time">
-            <a-card style="margin-bottom: 10px" :class="[currentColor,currentFont]">
+            <a-card style="margin-bottom: 10px;background-color: #f5f5f5; "   :class="[currentColor,currentFont]">
               <h3>{{ item.time }}</h3>
               <b>{{ item.description }}</b>
             </a-card>

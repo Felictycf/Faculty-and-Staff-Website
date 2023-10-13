@@ -1,6 +1,8 @@
 <!--功能代码模版选择1-->
 <template >
   <div class="template" :class="[currentStyle, currentFont, currentColor]">
+
+    <h1>Desgin 1</h1>
     <div class="style-options">
       <label>Font Style:</label>
       <select v-model="currentStyle">
@@ -303,6 +305,9 @@ export default {
     },
   },
   methods: {
+    showAlert(){
+      window.alert("Please submit this pdf or url")
+    },
     nextPublication() {
       if (this.currentIndex + 3 >= this.userInfo.publications.length) {
         this.currentIndex = 0;  // 回到开始

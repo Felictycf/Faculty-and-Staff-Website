@@ -20,7 +20,7 @@ export const asyncRouterMap = [
         path: '/profile/advanced',
         name: 'ProfileAdvanced',
         component: () => import('@/views/profile/advanced/Advanced'),
-        meta: { title: ' View Profile', permission: ['profile'] },
+        meta: { title: 'Profile Choose Design View', permission: ['profile'] },
       },
       {
         path: '/form/base-form',
@@ -32,7 +32,7 @@ export const asyncRouterMap = [
         path: '/profile/basic',
         name: 'ProfileBasic',
         component: () => import('@/views/profile/basic'),
-        meta: { title: 'Profile Design View', permission: ['profile'] },
+        meta: { title: 'View Profile', permission: ['profile'] },
       },
       {
         path: '/profile/about',

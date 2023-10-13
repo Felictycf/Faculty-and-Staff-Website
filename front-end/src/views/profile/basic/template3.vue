@@ -1,6 +1,8 @@
 <!-- 功能代码模版选择4-->
 <template >
   <div :class="[currentStyle, currentFont, currentTitleColor, currentTitleSize,currentColor]">
+
+    <h1>Desgin 3</h1>
     <div :class="currentFont">
 
 
