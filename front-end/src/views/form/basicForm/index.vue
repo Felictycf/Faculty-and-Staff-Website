@@ -194,14 +194,14 @@
 <!--      </a-form-item>-->
 
       <a-form-item
-        label="Avibilitiy"
+        label="Availability"
         :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"
         :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"
       >
         <a-textarea
           v-decorator="['avibilitiy', { rules: [{ required: true }] }]"
           name="avibilitiy"
-          placeholder="Please enter Avibilitiy"
+          placeholder="Please enter Availability"
           :auto-size="{ minRows: 3, maxRows: 12 }"
         />
       </a-form-item>
@@ -500,7 +500,7 @@
       </a-form-item>
 
       <a-form-item
-        label="Aacdimic Position"
+        label="Aacdemic Position"
         :labelCol="{ lg: { span: 4 }, sm: { span: 4 } }"
         :wrapperCol="{ lg: { span: 16 }, sm: { span: 20 } }"
       >
@@ -617,10 +617,11 @@
 
 <script>
 import { message } from 'ant-design-vue'
-import { login, getInfo, logout } from '@/api/login'
+import {login, getInfo, logout, getInfoById} from '@/api/login'
 import axios from 'axios'
 import storage from 'store'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
+import configURl from "@/config/web";
 
 export default {
   name: 'BaseForm',
@@ -934,23 +935,38 @@ export default {
       this.$http.get('/api/users/list', {}).then((res) => {
         this.userList = res.list || []
         this.userList = this.userList.filter((item) => item.id !== storage.get(ACCESS_TOKEN))
+        console.log("edit data")
+        console.log(this.userList)
       })
     },
     getMyInfo() {
-      const that = this
-      getInfo().then((res) => {
-        that.form.setFieldsValue({
-          ...res.userInfo,
-        })
+      const that = this;
 
-        this.formValue = res.userInfo
-        this.data1 = res.userInfo.highlights || []
-        this.data2 = res.userInfo.publications || []
-        this.data3 = res.userInfo.degrees || []
-        this.data4 = res.userInfo.aacdimicPosition || []
-        this.data5 = res.userInfo.teaching || []
-      })
+      getInfo().then((res) => {
+        if (!res.userInfo.firstName) {  // 如果firstName为空
+          getInfoById("5cf5e069-4fb3-43b6-b0cf-754827a9a737").then(innerRes => {
+            innerRes.userInfo.id = res.userInfo.id;
+            that.setUserInfo(innerRes.userInfo);
+          });
+        } else {
+          that.setUserInfo(res.userInfo);
+        }
+      });
     },
+
+    setUserInfo(userInfo) {
+      this.form.setFieldsValue({
+        ...userInfo
+      });
+
+      this.formValue = userInfo;
+      this.data1 = userInfo.highlights || [];
+      this.data2 = userInfo.publications || [];
+      this.data3 = userInfo.degrees || [];
+      this.data4 = userInfo.aacdimicPosition || [];
+      this.data5 = userInfo.teaching || [];
+    }
+,
     // handleRemove(file) {
     //   const index = fileList.value.indexOf(file)
     //   const newFileList = fileList.value.slice()
@@ -967,8 +983,8 @@ export default {
 
       axios({
         method: 'post',
-        //url: `http://localhost:3001/api/upLoad/file`,
-         url: `http://47.113.221.19:3001/api/upLoad/file`,
+        url:configURl.baseURL+'/api/upLoad/file',
+        // url: `http://47.113.221.19:3001/api/upLoad/file`,
         data: formData,
         headers: {
           'X-Requested-With': null,
@@ -997,7 +1013,8 @@ export default {
       axios({
         method: 'post',
        //url: `http://localhost:3001/api/upLoad/file`,
-         url: `http://47.113.221.19:3001/api/upLoad/file`,
+        url:configURl.baseURL+'/api/upLoad/file',
+       //  url: `http://47.113.221.19:3001/api/upLoad/file`,
         data: formData,
         headers: {
           'X-Requested-With': null,
@@ -1032,7 +1049,9 @@ export default {
       axios({
         method: 'post',
         //url: `http://localhost:3001/api/upLoad/file`,
-         url: `http://47.113.221.19:3001/api/upLoad/file`,
+        url:configURl.baseURL+'/api/upLoad/file',
+
+        // url: `http://47.113.221.19:3001/api/upLoad/file`,
         data: formData,
         headers: {
           'X-Requested-With': null,
@@ -1092,7 +1111,8 @@ export default {
         if (this.data5?.length) {
           values.teaching = this.data5
         }
-
+        console.log("submit data")
+        console.log(values)
         this.$http.post('/api/users/edit', values).then((response) => {
           this.getMyInfo()
           this.$router.push('/profile/basic')

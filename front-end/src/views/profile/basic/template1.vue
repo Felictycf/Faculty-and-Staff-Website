@@ -142,10 +142,19 @@
                 <div class="publication-item">
                   <img :src="item.img" alt="" class="publication-img" />
                   <div class="publication-data">
-                    <h1>{{ item.title }}</h1>
+                    <h1 class="time1">{{ item.title }}</h1>
                     <div class="time">time : {{ item.time }}</div>
                     <div class="description">{{ item.description }}</div>
-                    <a class="pdf-link" :href="item.pdf" :download="item.pdf">Read the full article</a>
+                    <!-- 如果item.pdf存在，显示这个链接 -->
+                    <a class="pdf-link" v-if="item.pdf" :href="item.pdf" :download="item.pdf">Read the full article</a>
+
+                    <!-- 如果item.pdf不存在，但item.url存在，显示这个链接 -->
+                    <a class="pdf-link" v-else-if="item.url" :href="item.url">Read the full article</a>
+
+                    <!-- 如果都不存在，显示一个按钮，并弹出提示 -->
+                    <button class="pdf-link" v-else @click="showAlert">Read the full article</button>
+
+                    <!-- 可以在此添加其他条件或默认的渲染内容，如果需要的话 -->
                   </div>
                 </div>
               </a-col>
@@ -492,6 +501,12 @@ export default {
                        margin-bottom: 2px; // Add some space between title and description
                      }
 
+                     .time1 {
+                       max-height: 100px;  /* 为描述设置一个最大高度 */
+                       overflow: hidden;  /* 隐藏溢出的内容 */
+                       font-weight: bold; // Makes the title stand out
+                       margin-bottom: 2px; // Add some space between title and description
+                     }
                      .description {
                        //flex: 1; // Allows it to take up remaining space
                        //margin-bottom: 10px; // Add some space between description and link

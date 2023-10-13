@@ -51,6 +51,26 @@ export function register(parameter) {
 }
 
 export function getInfo(id = storage.get(ACCESS_TOKEN)) {
+  console.log("user data")
+  console.log(userApi.UserInfo+id)
+  console.log(userApi.UserInfo)
+  return request({
+    url: userApi.UserInfo + id,
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
+  })
+}
+export function getInfoById(id) {
+  if (!id) {
+    console.error("No ID provided for getInfoById");
+    return;
+  }
+
+  console.log("Fetching user data for ID:", id);
+  console.log(userApi.UserInfo + id);
+
   return request({
     url: userApi.UserInfo + id,
     method: 'get',

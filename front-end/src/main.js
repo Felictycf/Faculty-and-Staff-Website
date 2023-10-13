@@ -20,8 +20,10 @@ import { Transfer, FormModel, Cascader, Collapse, Timeline } from 'ant-design-vu
 // WARNING: `mockjs` NOT SUPPORT `IE` PLEASE DO NOT USE IN `production` ENV.
 import './mock'
 
- axios.defaults.baseURL = 'http://47.113.221.19:3001'
-//axios.defaults.baseURL = 'http://localhost:3001'
+ //axios.defaults.baseURL = 'http://47.113.221.19:3001'
+// axios.defaults.baseURL = 'http://localhost:3001'
+import configURl from './config/web'
+axios.defaults.baseURL=configURl.baseURL;
 import bootstrap from './core/bootstrap'
 import './core/lazy_use' // use lazy load components
 import './permission' // permission control

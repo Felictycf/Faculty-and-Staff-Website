@@ -17,12 +17,6 @@ export const asyncRouterMap = [
     children: [
 
       {
-        path: '/profile/basic',
-        name: 'ProfileBasic',
-        component: () => import('@/views/profile/basic'),
-        meta: { title: 'Profile Design View', permission: ['profile'] },
-      },
-      {
         path: '/profile/advanced',
         name: 'ProfileAdvanced',
         component: () => import('@/views/profile/advanced/Advanced'),
@@ -33,6 +27,12 @@ export const asyncRouterMap = [
         name: 'BaseForm',
         component: () => import('@/views/form/basicForm/index.vue'),
         meta: { title: 'Edit Profile', keepAlive: true, permission: ['form'] },
+      },
+      {
+        path: '/profile/basic',
+        name: 'ProfileBasic',
+        component: () => import('@/views/profile/basic'),
+        meta: { title: 'Profile Design View', permission: ['profile'] },
       },
       {
         path: '/profile/about',
@@ -406,10 +406,13 @@ export const constantRouterMap = [
         name: 'registerResult',
         component: () => import(/* webpackChunkName: "user" */ '@/views/user/RegisterResult'),
       },
-      {
-        path: 'recover',
+      { path: 'studentview',
+        name: 'studentview',
+        component: ()=>import('@/views/studentview/basic/ViweList'),
+      },
+      { path: 'recover/:id',
         name: 'recover',
-        component: undefined,
+        component: ()=>import('@/views/studentview/basic/index'),
       },
     ],
   },

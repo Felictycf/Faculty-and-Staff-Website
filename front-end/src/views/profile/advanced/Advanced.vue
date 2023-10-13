@@ -17,7 +17,7 @@
         <div class="header-container">
           <h3>Design 2</h3>
           <a-button type="primary">
-            <a href="#" @click.prevent="settemplate(2)">more detail</a>
+            <a href="#" @click.prevent="settemplate(2)">More detail</a>
           </a-button>
         </div>
         <img src="@/assets/template2.jpg" @click="setTemplate(2)" />

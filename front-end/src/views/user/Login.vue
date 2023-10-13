@@ -300,9 +300,11 @@ export default {
           message: 'set info first',
         })
 
-        this.$router.push({ path: '/form/base-form' })
+        // this.$router.push({ path: '/form/base-form' })
+        this.$router.push({ path: '/profile/about' })
       } else {
-        this.$router.push({ path: '/profile/basic' })
+        // this.$router.push({ path: '/profile/basic' })
+        this.$router.push({ path: '/profile/about' })
       }
 
       // 延迟 1 秒显示欢迎信息
