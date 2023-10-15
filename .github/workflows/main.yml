@@ -21,17 +21,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14.x
-      
+
 
       # 安装前端依赖
       - name: Install frontend dependencies
         working-directory: ./front-end
-        run: npm ci
+        run: npm install
 
       # 安装后端依赖
       - name: Install backend dependencies
         working-directory: ./server
-        run: npm ci
+        run: npm install
 
       # 构建前端
       - name: Build frontend
