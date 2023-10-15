@@ -32,7 +32,16 @@ jobs:
       - name: Install backend dependencies
         working-directory: ./server
         run: npm install
-
+      # 加入缓存步骤
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            front-end/node_modules
+            server/node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-
       # 构建前端
       - name: Build frontend
         working-directory: ./front-end
