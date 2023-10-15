@@ -15,8 +15,8 @@ const constantRouterComponents = {
   '500': () => import(/* webpackChunkName: "error" */ '@/views/exception/500'),
 
   // 你需要动态引入的页面组件
-  Workplace: () => import('@/views/dashboard/Workplace'),
-  Analysis: () => import('@/views/dashboard/Analysis'),
+  // Workplace: () => import('@/views/dashboard/Workplace'),
+  // Analysis: () => import('@/views/dashboard/Analysis'),
 
   // form
   BasicForm: () => import('@/views/form/basicForm/index.vue'),
@@ -24,13 +24,13 @@ const constantRouterComponents = {
   AdvanceForm: () => import('@/views/form/advancedForm/AdvancedForm'),
 
   // list
-  TableList: () => import('@/views/list/TableList'),
-  StandardList: () => import('@/views/list/BasicList'),
-  CardList: () => import('@/views/list/CardList'),
-  SearchLayout: () => import('@/views/list/search/SearchLayout'),
-  SearchArticles: () => import('@/views/list/search/Article'),
-  SearchProjects: () => import('@/views/list/search/Projects'),
-  SearchApplications: () => import('@/views/list/search/Applications'),
+  // TableList: () => import('@/views/list/TableList'),
+  // StandardList: () => import('@/views/list/BasicList'),
+  // CardList: () => import('@/views/list/CardList'),
+  // SearchLayout: () => import('@/views/list/search/SearchLayout'),
+  // SearchArticles: () => import('@/views/list/search/Article'),
+  // SearchProjects: () => import('@/views/list/search/Projects'),
+  // SearchApplications: () => import('@/views/list/search/Applications'),
   ProfileBasic: () => import('@/views/profile/basic'),
   ProfileAdvanced: () => import('@/views/profile/advanced/Advanced'),
 

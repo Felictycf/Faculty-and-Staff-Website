@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const static = require('koa-static');
 const cors = require('koa2-cors');
 
-const initData = require('./controller/index');
+// const initData = require('./controller/index');
 
 const { koaBody } = require('koa-body');
 
@@ -38,7 +38,7 @@ app.use(
 // 引入users.js
 const users = require('./routes/api/users');
 // const papers = require('./routes/api/papers');
-const common = require('./routes/api/common');
+// const common = require('./routes/api/common');
 const Up = require('./controller/upload');
 
 // 路由
@@ -55,7 +55,7 @@ mongoose
   .then(() => {
     console.log('Mongodb Connectd...');
     // 这里进行本分数据的初始化
-    initData();
+    // initData();
   })
   .catch((err) => {
     console.log(err);
@@ -64,7 +64,7 @@ mongoose
 // 配置路由地址 localhost:5000/api/users
 router.use('/api/users', users);
 // router.use('/api/papers', papers);
-router.use('/api/common', common);
+// router.use('/api/common', common);
 
 // 配置路由
 app.use(router.routes()).use(router.allowedMethods());

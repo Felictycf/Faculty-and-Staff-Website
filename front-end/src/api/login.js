@@ -62,6 +62,7 @@ export function getInfo(id = storage.get(ACCESS_TOKEN)) {
     },
   })
 }
+
 export function getInfoById(id) {
   if (!id) {
     console.error("No ID provided for getInfoById");
