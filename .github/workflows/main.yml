@@ -32,7 +32,7 @@ jobs:
       - name: Install backend dependencies
         working-directory: ./server
         run: npm install
-      # 加入缓存步骤
+      # 加入缓存步骤 cache
       - name: Cache node modules
         uses: actions/cache@v2
         with:
