@@ -46,6 +46,13 @@ jobs:
       - name: Build frontend
         working-directory: ./front-end
         run: npm run build
+      - name: Lint frontend code
+        working-directory: ./front-end
+        run: npm run test
+
+      - name: Lint backend code
+        working-directory: ./server
+        run: npm run test
 
       # 如果你有后端测试，可以在这里运行它们
       - name: Run backend tests (or other tasks)
