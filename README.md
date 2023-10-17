@@ -75,7 +75,7 @@ Front-end project structure
 
 
 Backend Technologies
-Main Technologies.
+Main Technologies
 - - Koa a lightweight Node.js web framework for building web applications and APIs.
     Middleware and Tools.
 - bcryptjs: a library for password encryption, often used for encrypted storage of user passwords.

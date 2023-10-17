@@ -7,13 +7,16 @@
     "dev": "node app.js"
   },
   "dependencies": {
+    "autocannon": "^7.12.0",
     "bcryptjs": "^2.4.3",
+    "jest": "^29.7.0",
     "koa": "^2.14.2",
     "koa-body": "^6.0.1",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "koa2-cors": "^2.0.6",
     "mongoose": "^7.3.1",
+    "supertest": "^6.3.3",
     "uuid": "^9.0.0"
   }
 }

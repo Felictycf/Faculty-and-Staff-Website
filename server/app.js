@@ -3,7 +3,6 @@ const koa = require('koa');
 const Router = require('koa-router');
 const mongoose = require('mongoose');
 // const bodyParser = require('koa-bodyparser');
-const static = require('koa-static');
 const cors = require('koa2-cors');
 
 // const initData = require('./controller/index');
@@ -19,8 +18,6 @@ app.use(cors({}));
 // 静态资源目录对于相对入口文件index.js的路径
 const staticPath = './upload';
 // http://localhost:3001/main/index.html
-app.use(static(path.join(__dirname, staticPath)));
-app.use(static(path.join(__dirname, './front-end/dist')));
 
 // 加载解析post的body数据中的中间件
 //开启文件上传功能
@@ -74,3 +71,4 @@ const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`server started on ${port}, open http://localhost:${port}/index.html`);
 });
+module.exports = app;
