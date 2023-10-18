@@ -1,6 +1,5 @@
 <template>
   <div class="template" :class="[currentStyle, currentFont, currentColor]">
-    <!-- 接下来是自定义样式的选项 -->
 
     <a-row :gutter="2">
       <a-col :span="12">
@@ -84,7 +83,6 @@
           </a-row>
 <br/>
           <div style="display: flex; align-items: center; justify-content: flex-start; font-size: 18px;">
-            <!-- 使用Ant Design的信封图标作为对应项的标识 -->
             <a-icon type="mail" style="margin-right: 10px; font-size: 20px; color: #1890ff;"></a-icon>
             <p style="margin: 0;">Correspondence: {{userInfo.contribution}}</p>
           </div>
@@ -222,7 +220,6 @@ export default {
     currentPublications() {
       return this.userInfo.publications.slice(this.currentIndex, this.currentIndex + 3);
     },
-    // ...其他计算属性...
   },
 
   props: {
@@ -267,12 +264,12 @@ export default {
 
 <style lang="less" scoped>
 .contact-info {
-  font-size: 20px;      /* 调大字体大小 */
-  margin-bottom: 15px; /* 增加间隔 */
+  font-size: 20px;
+  margin-bottom: 15px;
 }
 
 .contact-info a-icon {
-  margin-right: 8px;   /* 图标和文本之间的间隔 */
+  margin-right: 8px;
 }
 
 body {
@@ -415,14 +412,14 @@ a-icon {
 }
 
 .availability-box ol {
-  list-style-type: none;  /* 移除默认的数字 */
+  list-style-type: none;
 
   li {
     position: relative;
-    padding-left: 25px;   /* 留出空间给圆点 */
+    padding-left: 25px;
 
     &:before {
-      content: "";        /* 创建一个实心圆 */
+      content: "";
       position: absolute;
       left: 0;
       top: 50%;
@@ -434,7 +431,6 @@ a-icon {
     }
   }
 }
-// 新增的自定义样式部分
 .arial-style {
   font-family: 'Arial', sans-serif;
 }
@@ -478,7 +474,6 @@ a-icon {
 .green-color {
   color: green;
 }
-//... 其他样式
 .style-options {
   margin-top: 20px;
   select {

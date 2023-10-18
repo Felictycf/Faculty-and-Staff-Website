@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <!-- 左边栏 -->
     <div class="left-pane-wrapper">
       <a-avatar size="large" icon="user" style="margin-bottom: 200px"></a-avatar>
       <div class="left-pane">
@@ -49,14 +48,11 @@
 
 
 
-    <!-- 中间栏 -->
     <div class="middle-pane">
-      <!-- 中间栏 -->
 
 
           <label>Faculty</label>
           <a-select placeholder="Select Faculty" style="width: 200px">
-            <!-- 添加你的Faculty选项，例如: -->
             <a-select-option value="Science">Science</a-select-option>
             <a-select-option value="Arts">Arts</a-select-option>
           </a-select>
@@ -98,7 +94,6 @@
       </div>
     </div>
 
-    <!-- 右边栏 -->
     <div class="right-pane">
       <div class="image-upload" v-for="n in 5" :key="n">
         <input type="file" accept="image/*">
@@ -115,9 +110,9 @@
 }
 
 .left-pane-wrapper {
-  flex: 1; /* 使得包裹组合与其他栏目平分空间 */
+  flex: 1;
   padding: 20px;
-  position: relative; /* 这样子元素可以相对于它定位 */
+  position: relative;
 }
 
 .left-pane {
@@ -127,10 +122,10 @@
 }
 
 a-avatar {
-  position: absolute; /* 绝对定位使头像悬浮在紫色框之上 */
-  top: 0; /* 定位到上边界 */
-  left: 50%; /* 横向中心定位 */
-  transform: translateX(-50%); /* 水平居中 */
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .middle-pane, .right-pane {

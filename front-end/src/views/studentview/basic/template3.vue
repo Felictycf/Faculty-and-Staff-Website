@@ -1,4 +1,4 @@
-<!-- 功能代码模版选择4-->
+<!-- Choose 4 for the feature code template-->
 <template >
   <div :class="[currentStyle, currentFont, currentTitleColor, currentTitleSize,currentColor]">
     <div :class="currentFont">
@@ -139,18 +139,16 @@ export default {
         { name: 'Default', className: 'default-color' },
         { name: 'Red', className: 'red-color' },
         { name: 'Blue', className: 'blue-color' },
-        //... 其他颜色
       ],
       titleSizeList: [
         { name: 'Default', className: 'default-size' },
         { name: 'Large', className: 'large-title' },
         { name: 'Extra Large', className: 'xlarge-title' },
-        //... 其他大小
       ],
       currentBG:'blue-bg',
       currentFont:'small-font',
-      bgColor: '#ffffff', // 默认为白色
-      fontSize: '16px',     // 默认为16px，注意这里是字符串格式
+      bgColor: '#ffffff',
+      fontSize: '16px',
       currentIndex: 0,
       currentStyle: 'arial-style',
       fontList: [
@@ -185,7 +183,6 @@ export default {
             { name: '12px', className: 'small-font' },
             { name: '16px', className: 'medium-font' },
             { name: '20px', className: 'large-font' },
-            //... 其他大小
         ]
     }
   },
@@ -217,10 +214,9 @@ export default {
     currentPublications() {
       return this.userInfo.publications.slice(this.currentIndex, this.currentIndex + 3);
     },
-    // ...其他计算属性...
   },
   mounted() {
-    this.changeFont();  // 默认设置
+    this.changeFont();
   },
   methods: {
     changeBackground() {
@@ -239,7 +235,7 @@ export default {
       if (this.currentIndex + 3 < this.userInfo.publications.length) {
         this.currentIndex += 3;
       } else {
-        this.currentIndex = 0; // 从头开始
+        this.currentIndex = 0;
       }
     },
     prevPublication() {
@@ -249,7 +245,6 @@ export default {
         this.currentIndex = Math.floor((this.userInfo.publications.length - 1) / 3) * 3; // 跳转到最后一个组
       }
     },
-    // ...其他方法...
   },
   props: {
     userInfo: {
@@ -273,20 +268,18 @@ export default {
 
 .teaching-column {
   flex: 1;
-  min-width: 200px;  // 最小宽度
-  max-width: 45%;    // 最大宽度，避免太宽
-  margin: 10px;      // 四周边距
+  min-width: 200px;
+  max-width: 45%;
+  margin: 10px;
 }
 
 
 .arial-style {
   font-family: 'Arial', sans-serif;
-  /* 其他与Arial字体相关的样式 */
 }
 
 .verdana-style {
   font-family: 'Verdana', sans-serif;
-  /* 其他与Verdana字体相关的样式 */
 }
 .georgia-style {
   font-family: 'Georgia', serif;
@@ -346,7 +339,7 @@ export default {
   background-color: #ffffff;
 }
 .blue-bg {
-  background-color: #464d63;  // 更亮的背景
+  background-color: #464d63;
 
 }
 
@@ -354,7 +347,6 @@ export default {
   background-color: #000000;
 }
 
-// ...其他颜色样式
 
 .small-font {
   font-size: 12px;
@@ -368,22 +360,19 @@ export default {
   font-size: 20px;
 }
 
-// ...其他字体大小样式
 
 
 
 .limited-description {
   .ell-3;
 
-  max-width: 80%;  // 或根据你的需要调整
+  max-width: 80%;
 }
 
-/* 为图标添加基本的样式和间距 */
 a-icon {
   margin-right: 8px;
 }
 
-/* 使用ellipsis来限制显示的描述长度 */
 .ell-3 {
   overflow: hidden;
   display: -webkit-box;
@@ -391,17 +380,15 @@ a-icon {
   -webkit-line-clamp: 5;
 }
 
-/* 在需要的地方应用这个样式，例如 */
 .red-color h1, .red-color h2 {
   color: red;
 }
 .blue-color h1, .blue-color h2 {
   color: blue;
 }
-//... 其他颜色样式
 
 .large-title h1, .large-title h2 {
-  font-size: 150%; // 调整大小
+  font-size: 150%;
 }
 .xlarge-title h1 {
   font-size: 200%;
@@ -409,7 +396,6 @@ a-icon {
 .xlarge-title h2 {
   font-size: 175%;
 }
-//... 其他字体大小样式
 
 
 .ell-1 {
@@ -426,7 +412,6 @@ a-icon {
   -webkit-line-clamp: 2;
 }
 
-/* 基本样式设置 */
 body {
   font-family: 'Arial', sans-serif;
   line-height: 1.6;
@@ -434,7 +419,7 @@ body {
 
 .template {
   //font-family: "Hack Nerd Font Mono";
-  //background-color: #464d63;  // 更亮的背景
+  //background-color: #464d63;
   padding: 30px;
   border-radius: 10px;
   color: #f5f5f5;
@@ -457,7 +442,6 @@ h2 {
   padding-bottom: 5px;
 }
 
-/* 头像和个人信息 */
 img {
   //border-radius: 100px;
   width: 300px;
@@ -474,7 +458,6 @@ img {
   margin-bottom: 20px;
 }
 
-/* 电话和邮箱 */
 a-row {
   margin-top: 15px;
   font-size: 18px;
@@ -485,7 +468,6 @@ a-row {
 .green-color p {
   color: green;
 }
-//... 其他颜色样式
 
 /* Teaching, Degrees, and Academic Position sections */
 .list {
@@ -525,7 +507,6 @@ a-row {
 
 .publication-description {
   flex: 1;
-  // 将其应用到出版物描述上
   .ell-3;
 }
 
@@ -545,7 +526,6 @@ a-row {
 .arial-style div, .arial-style p, .arial-style h1, .arial-style h2 {
   font-family: 'Arial', sans-serif;
 }
-// ... 其他字体样式
 
 
 </style>

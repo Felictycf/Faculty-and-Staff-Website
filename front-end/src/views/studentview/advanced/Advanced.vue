@@ -1,4 +1,4 @@
-<!--第三个模板选择页面-->
+<!--The third template selects the page-->
 <template>
   <div class="template-choose">
     <h1 style="text-align: center">Choose Design</h1>

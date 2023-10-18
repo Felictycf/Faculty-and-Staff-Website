@@ -1,4 +1,4 @@
-<!--功能代码模版选择2-->
+<!--Feature code template selection 2-->
 <template>
   <div class="template"  :class="[currentStyle, currentFont, currentColor]">
 
@@ -246,13 +246,11 @@ export default {
       { name: 'Arial Narrow', className: 'arialNarrow-style' },
       { name: 'Arial Black', className: 'arialBlack-style' },
       { name: 'Anton', className: 'anton-style' }
-        // ... 其他字体可以加在此处
       ],
       fontSizeList: [
         { name: 'Small', className: 'small-font' },
         { name: 'Medium', className: 'medium-font' },
         { name: 'Large', className: 'large-font' },
-        // ... 其他大小可以加在此处
       ],
       colorList: [
         { name: 'Default', className: 'default-color' },
@@ -297,14 +295,13 @@ export default {
     currentPublications() {
       return this.userInfo.publications.slice(this.currentIndex, this.currentIndex + 3);
     },
-    // ...其他计算属性...
   },
   methods: {
     nextPublication() {
       if (this.currentIndex + 3 < this.userInfo.publications.length) {
         this.currentIndex += 3;
       } else {
-        this.currentIndex = 0; // 从头开始
+        this.currentIndex = 0;
       }
     },
     prevPublication() {
@@ -410,14 +407,14 @@ a-icon {
 }
 
 .pub-image {
-  object-fit: cover; // 保持原图的纵横比并裁切多余部分
+  object-fit: cover;
   padding-right: 10px;
 }
 
 /* Publications 样式 */
 .publication-description {
   display: -webkit-box;
-  -webkit-line-clamp: 3; // 只显示三行内容
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin: 10px 0;
@@ -426,22 +423,22 @@ a-icon {
 
 .pdf-button-col {
   display: flex;
-  align-items: center; // 垂直居中对齐按钮
+  align-items: center;
 }
 
 .pdf-button {
   display: inline-block;
-  background-color: #6bc3df; // 使用之前的颜色进行一致性设计
+  background-color: #6bc3df;
   color: white;
   padding: 5px 15px;
   border-radius: 4px;
-  transition: background-color 0.2s; // 轻微过渡效果
-  text-decoration: none; // 去除默认的下划线
+  transition: background-color 0.2s;
+  text-decoration: none;
   text-align: center;
 }
 
 .pdf-button:hover {
-  background-color: #549cae; // 悬停时稍微深色
+  background-color: #549cae;
 }
 
 
@@ -450,7 +447,6 @@ body {
   color: #333;
 }
 
-/* Teaching 样式优化 */
 .teaching-circle {
   border-radius: 12px;
   border: 8px solid #6bc3df;
@@ -461,7 +457,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加轻微的阴影 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .teaching-title {
@@ -486,20 +482,19 @@ body {
   //margin-left: 10px;  // Space between description and time
   font-weight: bold;  // Makes the time bold
 }
-/* Publications, Recent Highlights, Research 样式优化 */
 a-card {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加轻微的阴影 */
-  transition: transform 0.2s; /* 添加过渡效果 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
 }
 
 a-card:hover {
-  transform: translateY(-5px); /* 轻微上移效果 */
+  transform: translateY(-5px);
 }
 
 /* Research 样式 */
 a-collapse-panel[key="4"] {
-  background-color: #f8f9fa; /* 淡灰色背景 */
-  border-radius: 8px; /* 圆角 */
+  background-color: #f8f9fa;
+  border-radius: 8px;
   margin: 20px 0;
   padding: 20px;
 }
@@ -508,7 +503,7 @@ a-collapse-panel[key="4"] {
 h2 {
   color: #2b2b2b;
   font-size: 22px;
-  border-bottom: 2px solid #6bc3df; /* 颜色和 teaching-circle 一致的底部边框 */
+  border-bottom: 2px solid #6bc3df;
   margin-bottom: 20px;
   padding-bottom: 10px;
 }

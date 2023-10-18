@@ -1,4 +1,4 @@
-<!--功能代码模版选择1-->
+<!--Feature code template Select 1-->
 <template >
   <div class="template" :class="[currentStyle, currentFont, currentColor]">
 
@@ -50,7 +50,7 @@
         <a-tab-pane key="2" tab="About" force-render>
     <a-row :gutter="{ xs: 8, sm: 16, md: 24, lg: 32 }">
 
-      <!-- 第一列：时间轴1 -->
+      <!-- Column 1: Timeline 1-->
       <a-col :span="12">
         <a-timeline mode="left">
           <a-timeline-item >
@@ -92,7 +92,7 @@
         </a-timeline>
       </a-col>
 
-      <!-- 第二列：时间轴2 -->
+      <!-- Column 2: Timeline 2 -->
       <a-col :span="12"  >
         <a-timeline mode="right">
           <a-timeline-item>
@@ -207,13 +207,11 @@ export default {
         { name: 'Arial Narrow', className: 'arialNarrow-style' },
         { name: 'Arial Black', className: 'arialBlack-style' },
         { name: 'Anton', className: 'anton-style' }
-        // ... 其他字体可以加在此处
       ],
       fontSizeList: [
         { name: 'Small', className: 'small-font' },
         { name: 'Medium', className: 'medium-font' },
         { name: 'Large', className: 'large-font' },
-        // ... 其他大小可以加在此处
       ],
       colorList: [
         { name: 'Default', className: 'default-color' },
@@ -283,14 +281,14 @@ export default {
   methods: {
     nextPublication() {
       if (this.currentIndex + 3 >= this.userInfo.publications.length) {
-        this.currentIndex = 0;  // 回到开始
+        this.currentIndex = 0;  // Back to the beginning
       } else {
         this.currentIndex += 3;
       }
     },
     prevPublication() {
       if (this.currentIndex - 3 < 0) {
-        // 回到最后一组，保证它是3的倍数
+        // Go back to the last group and make sure it's a multiple of three
         this.currentIndex = Math.floor((this.userInfo.publications.length - 1) / 3) * 3;
       } else {
         this.currentIndex -= 3;
@@ -343,19 +341,19 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 80px;  /* 这将为按钮添加20px的间隔 */
-  margin-top: 20px; /* 如果需要，增加上部间隔 */
+  gap: 80px;  /* This will add 20px spacing to the button */
+  margin-top: 20px; /* If necessary, increase the upper interval */
 }
 
 .highlight-wrapper {
   margin: 20px 0;
-  background-color: #f7f8fa;  // 轻微的背景色，使其与背景形成对比
+  background-color: #f7f8fa;  // A slight background color that contrasts with the background
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); // 精致的阴影，使其具有深度感
-  transition: transform 0.3s ease; // 平滑的过渡效果
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); // Subtle shading gives it a sense of depth
+  transition: transform 0.3s ease; // Smooth transitions
 
   &:hover {
-    transform: translateY(-5px);  // 当鼠标悬停时，轻微向上移动
+    transform: translateY(-5px);  // When the mouse hovers, move up slightly
   }
 }
 
@@ -369,11 +367,11 @@ export default {
   width: 40px;
   height: 40px;
   background-color: #6bc3df;
-  border-radius: 50%;  // 创建一个完美的圆形
+  border-radius: 50%;  // Create a perfect circle
   display: flex;
   align-items: center;
   justify-content: center;
-  //color: white;  // 图标的颜色
+  //color: white;  // Icon color
   font-size: 24px;
 }
 
@@ -384,13 +382,13 @@ export default {
 
 .highlight-content {
   padding: 15px 20px;
-  font-size: 18px;  // 使字体稍微大一些
+  font-size: 18px;  // Make the font slightly larger
   //color: #333;  // 深色字体
 }
 
 .highlight-time {
   font-size: 16px;
-  //color: #888;  // 灰色的时间
+  //color: #888;  //
   margin-left: 10px;
 }
 
@@ -482,25 +480,25 @@ export default {
                      .description {
                        //flex: 1; // Allows it to take up remaining space
                        //margin-bottom: 10px; // Add some space between description and link
-                       max-height: 150px;  /* 为描述设置一个最大高度 */
-                       overflow: hidden;  /* 隐藏溢出的内容 */
-                       position: relative; /* 需要定位其伪类 */
-                       padding-bottom: 25px;  /* 为 "View PDF" 按钮预留空间 */
+                       max-height: 150px;
+                       overflow: hidden;
+                       position: relative;
+                       padding-bottom: 25px;
                      }
                      .description::after {
-                       content: "..."; /* 添加省略号 */
-                       position: absolute;  /* 绝对定位 */
+                       content: "...";
+                       position: absolute;
                        bottom: 0;
                        right: 0;
-                       background-color: #e3e5e5;  /* 与卡片背景相同的颜色 */
-                       padding-left: 5px;  /* 确保省略号与文本有些许间隔 */
+                       background-color: #e3e5e5;
+                       padding-left: 5px;
                      }
 
                      .pdf-link {
-                       position: absolute;  /* 绝对定位按钮确保它始终在底部 */
-                       bottom: 10px;  /* 与底部有10px的间隔 */
-                       left: 50%;  /* 中心对齐按钮 */
-                       transform: translateX(-50%);  /* 使用变换来完美居中 */
+                       position: absolute;
+                       bottom: 10px;
+                       left: 50%;
+                       transform: translateX(-50%);
                        align-self: center; // Centers the link
                        background-color: #333; // Dark background for the link
                        color: #fff; // White text
@@ -509,10 +507,6 @@ export default {
                        border-radius: 4px; // Rounded corners
 
 
-                       //background-image: url('../../../assets/jiuantou.png'); /* 请替换为您的图片路径 */
-                       //background-repeat: no-repeat; /* 确保图片不重复 */
-                       //background-position: left center; /* 图片居左居中对齐 */
-                       //padding-left: 10px; /* 如果箭头宽度约为20px，这会为图片提供空间并避免文本与图片重叠 */
                        &:hover {
                          background-color: #555; // Change background on hover
                        }
@@ -543,7 +537,7 @@ export default {
     //object-position: center;
   }
   h2, .avatar-wrapper, .user-info {
-    position: relative; /* 确保它们在背景图片之上 */
+    position: relative;
     z-index: 1;
   }
   .user-info{
@@ -634,12 +628,10 @@ export default {
 }
 .arial-style {
   font-family: 'Arial', sans-serif;
-  /* 其他与Arial字体相关的样式 */
 }
 
 .verdana-style {
   font-family: 'Verdana', sans-serif;
-  /* 其他与Verdana字体相关的样式 */
 }
 .georgia-style {
   font-family: 'Georgia', serif;

@@ -43,7 +43,7 @@ router.get('/', async (ctx) => {
   ctx.body = { msg: 'Hello Koa Interfaces' };
 });
 
-router.post('/api/upLoad/file', Up.upLoadImg); //这个为上传的API
+router.post('/api/upLoad/file', Up.upLoadImg);
 
 mongoose
     .connect('mongodb://cg:lianshi@47.113.221.19:27017/teacher-system?authSource=teacher-system', {
@@ -61,7 +61,7 @@ router.use('/api/users', users);
 // router.use('/api/papers', papers);
 // router.use('/api/common', common);
 
-// 配置路由
+// Configure routes
 app.use(router.routes()).use(router.allowedMethods());
 
 const port = process.env.PORT || 3001;

@@ -1,4 +1,4 @@
-<!--功能代码模版选择1-->
+<!--Feature code template Select 1-->
 <template >
   <div class="template" :class="[currentStyle, currentFont, currentColor]">
 
@@ -107,7 +107,7 @@
         </a-timeline>
       </a-col>
 
-      <!-- 第二列：时间轴2 -->
+      <!-- Column 2: Timeline 2 -->
       <a-col :span="12"  >
         <a-timeline mode="right">
           <a-timeline-item>
@@ -147,16 +147,16 @@
                     <h1 class="time1">{{ item.title }}</h1>
                     <div class="time">time : {{ item.time }}</div>
                     <div class="description">{{ item.description }}</div>
-                    <!-- 如果item.pdf存在，显示这个链接 -->
+                    <!-- If item.pdf exists, display the link -->
                     <a class="pdf-link" v-if="item.pdf" :href="item.pdf" :download="item.pdf">Read the full article</a>
 
-                    <!-- 如果item.pdf不存在，但item.url存在，显示这个链接 -->
+                    <!-- If item.pdf doesn't exist, but item.url does, display the link -->
                     <a class="pdf-link" v-else-if="item.url" :href="item.url">Read the full article</a>
 
-                    <!-- 如果都不存在，显示一个按钮，并弹出提示 -->
+                    <!-- If none exists, display a button and pop up a hint -->
                     <button class="pdf-link" v-else @click="showAlert">Read the full article</button>
 
-                    <!-- 可以在此添加其他条件或默认的渲染内容，如果需要的话 -->
+                    <!-- You can add other conditions or default rendering content here, if needed-->
                   </div>
                 </div>
               </a-col>
@@ -370,19 +370,19 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 80px;  /* 这将为按钮添加20px的间隔 */
-  margin-top: 20px; /* 如果需要，增加上部间隔 */
+  gap: 80px;
+  margin-top: 20px;
 }
 
 .highlight-wrapper {
   margin: 20px 0;
-  background-color: #f7f8fa;  // 轻微的背景色，使其与背景形成对比
+  background-color: #f7f8fa;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); // 精致的阴影，使其具有深度感
-  transition: transform 0.3s ease; // 平滑的过渡效果
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
 
   &:hover {
-    transform: translateY(-5px);  // 当鼠标悬停时，轻微向上移动
+    transform: translateY(-5px);
   }
 }
 
@@ -396,11 +396,11 @@ export default {
   width: 40px;
   height: 40px;
   background-color: #6bc3df;
-  border-radius: 50%;  // 创建一个完美的圆形
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  //color: white;  // 图标的颜色
+  //color: white;
   font-size: 24px;
 }
 
@@ -411,7 +411,7 @@ export default {
 
 .highlight-content {
   padding: 15px 20px;
-  font-size: 18px;  // 使字体稍微大一些
+  font-size: 18px;
   //color: #333;  // 深色字体
 }
 
@@ -507,33 +507,33 @@ export default {
                      }
 
                      .time1 {
-                       max-height: 100px;  /* 为描述设置一个最大高度 */
-                       overflow: hidden;  /* 隐藏溢出的内容 */
+                       max-height: 100px;
+                       overflow: hidden;
                        font-weight: bold; // Makes the title stand out
                        margin-bottom: 2px; // Add some space between title and description
                      }
                      .description {
                        //flex: 1; // Allows it to take up remaining space
                        //margin-bottom: 10px; // Add some space between description and link
-                       max-height: 150px;  /* 为描述设置一个最大高度 */
-                       overflow: hidden;  /* 隐藏溢出的内容 */
-                       position: relative; /* 需要定位其伪类 */
-                       padding-bottom: 25px;  /* 为 "View PDF" 按钮预留空间 */
+                       max-height: 150px;
+                       overflow: hidden;
+                       position: relative;
+                       padding-bottom: 25px;
                      }
                      .description::after {
-                       content: "..."; /* 添加省略号 */
-                       position: absolute;  /* 绝对定位 */
+                       content: "...";
+                       position: absolute;
                        bottom: 0;
                        right: 0;
-                       background-color: #e3e5e5;  /* 与卡片背景相同的颜色 */
-                       padding-left: 5px;  /* 确保省略号与文本有些许间隔 */
+                       background-color: #e3e5e5;
+                       padding-left: 5px;
                      }
 
                      .pdf-link {
-                       position: absolute;  /* 绝对定位按钮确保它始终在底部 */
-                       bottom: 10px;  /* 与底部有10px的间隔 */
-                       left: 50%;  /* 中心对齐按钮 */
-                       transform: translateX(-50%);  /* 使用变换来完美居中 */
+                       position: absolute;
+                       bottom: 10px;
+                       left: 50%;
+                       transform: translateX(-50%);
                        align-self: center; // Centers the link
                        background-color: #333; // Dark background for the link
                        color: #fff; // White text
@@ -542,10 +542,10 @@ export default {
                        border-radius: 4px; // Rounded corners
 
 
-                       //background-image: url('../../../assets/jiuantou.png'); /* 请替换为您的图片路径 */
-                       //background-repeat: no-repeat; /* 确保图片不重复 */
-                       //background-position: left center; /* 图片居左居中对齐 */
-                       //padding-left: 10px; /* 如果箭头宽度约为20px，这会为图片提供空间并避免文本与图片重叠 */
+                       //background-image: url('../../../assets/jiuantou.png');
+                       //background-repeat: no-repeat;
+                       //background-position: left center;
+                       //padding-left: 10px;
                        &:hover {
                          background-color: #555; // Change background on hover
                        }
@@ -667,12 +667,12 @@ export default {
 }
 .arial-style {
   font-family: 'Arial', sans-serif;
-  /* 其他与Arial字体相关的样式 */
+  /* Other styles related to Verdana fonts */
 }
 
 .verdana-style {
   font-family: 'Verdana', sans-serif;
-  /* 其他与Verdana字体相关的样式 */
+  /* Other styles related to Verdana fonts */
 }
 .georgia-style {
   font-family: 'Georgia', serif;

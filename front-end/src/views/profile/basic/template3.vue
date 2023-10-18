@@ -1,4 +1,4 @@
-<!-- 功能代码模版选择4-->
+<!-- Choose 4 for the feature code template-->
 <template >
   <div :class="[currentStyle, currentFont, currentTitleColor, currentTitleSize,currentColor]">
 
@@ -177,24 +177,24 @@ export default {
       colorList: [
         { name: 'Default', className: 'default-color' },
         { name: 'Green', className: 'green-color' },
-        //... 其他颜色
+        //... other color
       ],
       titleColorList: [
         { name: 'Default', className: 'default-color' },
         { name: 'Red', className: 'red-color' },
         { name: 'Blue', className: 'blue-color' },
-        //... 其他颜色
+        //... other color
       ],
       titleSizeList: [
         { name: 'Default', className: 'default-size' },
         { name: 'Large', className: 'large-title' },
         { name: 'Extra Large', className: 'xlarge-title' },
-        //... 其他大小
+        //... other size
       ],
       currentBG:'blue-bg',
       currentFont:'small-font',
-      bgColor: '#ffffff', // 默认为白色
-      fontSize: '16px',     // 默认为16px，注意这里是字符串格式
+      bgColor: '#ffffff', // The default is white.
+      fontSize: '16px',     // The default is 16px, but note that this is in string format
       currentIndex: 0,
       currentStyle: 'arial-style',
       fontList: [
@@ -274,7 +274,7 @@ export default {
       document.documentElement.className = this.fontSize;
     },
     changeStyle() {
-      // 方法内容...
+      // Method content...
     },
     changeFont() {
       document.documentElement.style.fontFamily = this.selectedFont;
@@ -293,7 +293,6 @@ export default {
         this.currentIndex = Math.floor((this.userInfo.publications.length - 1) / 3) * 3; // 跳转到最后一个组
       }
     },
-    // ...其他方法...
   },
   props: {
     userInfo: {
@@ -317,15 +316,15 @@ export default {
 
 .teaching-column {
   flex: 1;
-  min-width: 200px;  // 最小宽度
-  max-width: 45%;    // 最大宽度，避免太宽
-  margin: 10px;      // 四周边距
+  min-width: 200px;  //Minimum width
+  max-width: 45%;    // Maximum width, avoid being too wide
+  margin: 10px;      // Four perimeter distance
 }
 
 
 .arial-style {
   font-family: 'Arial', sans-serif;
-  /* 其他与Arial字体相关的样式 */
+  /* Any other styles associated with the Arial font */
 }
 
 .verdana-style {
@@ -412,22 +411,19 @@ export default {
   font-size: 20px;
 }
 
-// ...其他字体大小样式
 
 
 
 .limited-description {
   .ell-3;
 
-  max-width: 80%;  // 或根据你的需要调整
+  max-width: 80%;
 }
 
-/* 为图标添加基本的样式和间距 */
 a-icon {
   margin-right: 8px;
 }
 
-/* 使用ellipsis来限制显示的描述长度 */
 .ell-3 {
   overflow: hidden;
   display: -webkit-box;
@@ -435,17 +431,15 @@ a-icon {
   -webkit-line-clamp: 5;
 }
 
-/* 在需要的地方应用这个样式，例如 */
 .red-color h1, .red-color h2 {
   color: red;
 }
 .blue-color h1, .blue-color h2 {
   color: blue;
 }
-//... 其他颜色样式
 
 .large-title h1, .large-title h2 {
-  font-size: 150%; // 调整大小
+  font-size: 150%;
 }
 .xlarge-title h1 {
   font-size: 200%;
@@ -470,7 +464,6 @@ a-icon {
   -webkit-line-clamp: 2;
 }
 
-/* 基本样式设置 */
 body {
   font-family: 'Arial', sans-serif;
   line-height: 1.6;
@@ -478,7 +471,6 @@ body {
 
 .template {
   //font-family: "Hack Nerd Font Mono";
-  //background-color: #464d63;  // 更亮的背景
   padding: 30px;
   border-radius: 10px;
   color: #f5f5f5;
@@ -501,7 +493,6 @@ h2 {
   padding-bottom: 5px;
 }
 
-/* 头像和个人信息 */
 img {
   //border-radius: 100px;
   width: 300px;
@@ -518,7 +509,6 @@ img {
   margin-bottom: 20px;
 }
 
-/* 电话和邮箱 */
 a-row {
   margin-top: 15px;
   font-size: 18px;
@@ -529,7 +519,6 @@ a-row {
 .green-color p {
   color: green;
 }
-//... 其他颜色样式
 
 /* Teaching, Degrees, and Academic Position sections */
 .list {
@@ -589,7 +578,6 @@ a-row {
 .arial-style div, .arial-style p, .arial-style h1, .arial-style h2 {
   font-family: 'Arial', sans-serif;
 }
-// ... 其他字体样式
 
 
 </style>

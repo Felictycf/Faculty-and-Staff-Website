@@ -1,4 +1,4 @@
-<!--功能代码模版选择2-->
+<!--Feature code template selection 2-->
 <template>
   <div class="template"  :class="[currentStyle, currentFont, currentColor]">
     <h1>Desgin 2</h1>
@@ -311,7 +311,7 @@ export default {
     currentPublications() {
       return this.userInfo.publications.slice(this.currentIndex, this.currentIndex + 3);
     },
-    // ...其他计算属性...
+    // ...Other computed properties...
   },
   methods: {
     nextPublication() {
@@ -455,7 +455,7 @@ a-icon {
 }
 
 .pdf-button:hover {
-  background-color: #549cae; // 悬停时稍微深色
+  background-color: #549cae; // Slightly darker when hovering
 }
 
 
@@ -464,7 +464,7 @@ body {
   color: #333;
 }
 
-/* Teaching 样式优化 */
+/* Teaching Style optimization */
 .teaching-circle {
   border-radius: 12px;
   border: 8px solid #6bc3df;
@@ -475,13 +475,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加轻微的阴影 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a slight shadow */
 }
 
 .teaching-title {
   font-size: 26px;
   margin-bottom: 25px;
-  color: #2b2b2b; /* 深色文本 */
+  color: #2b2b2b; /* Dark text */
 }
 
 
@@ -518,21 +518,21 @@ a-collapse-panel[key="4"] {
   padding: 20px;
 }
 
-/* Recent Highlights 样式 */
+/* Recent Highlights  */
 h2 {
   color: #2b2b2b;
   font-size: 22px;
-  border-bottom: 2px solid #6bc3df; /* 颜色和 teaching-circle 一致的底部边框 */
+  border-bottom: 2px solid #6bc3df; /* The bottom border with the same color as the teaching-circle */
   margin-bottom: 20px;
   padding-bottom: 10px;
 }
 
 .item {
-  transition: background-color 0.2s; /* 添加背景颜色过渡效果 */
+  transition: background-color 0.2s; /* Add a background color transition */
 }
 
 .item:hover {
-  background-color: #e9f5f8; /* 悬停时的背景颜色 */
+  background-color: #e9f5f8; /* The background color when hovering */
 }
 
 .ell-1 {
@@ -609,12 +609,12 @@ h2 {
 }
 .arial-style {
   font-family: 'Arial', sans-serif;
-  /* 其他与Arial字体相关的样式 */
+  /* Any other styles associated with the Arial font */
 }
 
 .verdana-style {
   font-family: 'Verdana', sans-serif;
-  /* 其他与Verdana字体相关的样式 */
+  /* Other styles related to Verdana fonts */
 }
 .georgia-style {
   font-family: 'Georgia', serif;
