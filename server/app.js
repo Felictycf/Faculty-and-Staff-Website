@@ -45,19 +45,17 @@ router.get('/', async (ctx) => {
 
 router.post('/api/upLoad/file', Up.upLoadImg); //这个为上传的API
 
-// 连接数据库
 mongoose
-    // .connect('mongodb://47.113.221.19:27017/teacher-system', { useNewUrlParser: true })
-    .connect('mongodb://127.0.0.1:27017/teacher-system', { useNewUrlParser: true })
-  .then(() => {
-    console.log('Mongodb Connectd...');
-    // 这里进行本分数据的初始化
-    // initData();
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
+    .connect('mongodb://cg:lianshi@47.113.221.19:27017/teacher-system?authSource=teacher-system', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .then(() => {
+        console.log('MongoDB Connected...');
+    })
+    .catch((err) => {
+        console.error('MongoDB Connection Error:', err);
+    });
 // 配置路由地址 localhost:5000/api/users
 router.use('/api/users', users);
 // router.use('/api/papers', papers);
